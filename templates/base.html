@@ -1,8 +1,13 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>{% block title %}{% endblock %}</title>
-</head>
+ {% load staticfiles %}
+    <head>
+   <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
+   <link rel="stylesheet" href="{% static '/base.css' %}"/>
+   <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <title>{% block title %}{% endblock %}</title>
+        {% block archivos %}{% endblock %}
+    </head>
 <body>
 {% block content %}
 {% endblock %}
