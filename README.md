@@ -1,2 +1,2 @@
 # Presscolar
-Una proyecto con el fin de administrar una escuela de nivel preescolar
+Una proyecto con el fin de administrar una escuela de nivel preesscolar
