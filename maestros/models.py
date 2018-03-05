@@ -18,11 +18,21 @@ class grupos(models.Model):
     gru_maestro = models.ForeignKey(maestros, on_delete=models.CASCADE, blank=True, null=True, related_name="Maestro")
     gru_alumnos = models.ManyToManyField(alumnos)
     gru_salon = models.CharField(max_length = 10, default='')
+    gru_grado = models.IntegerField(null=True)
     
     def __str__(self):
         return self.gru_clave
     
+class DiarioTrabajo(models.Model):
+    DT_maestro = models.ForeignKey(maestros, on_delete = models.CASCADE)
+    DT_alumno = models.ForeignKey(alumnos, on_delete= models.CASCADE)
+    DT_fecha = models.DateField(auto_now_add = True)
+    DT_descripcion = models.CharField(max_length = 2000)
+    DT_actividadApoyo = models.CharField(max_length = 2000)
+    DT_necesidades = models.CharField(max_length = 2000)
     
+    def __str__(self):
+        return self.DT_alumno
     
     
     
