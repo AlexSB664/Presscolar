@@ -15,10 +15,26 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf.urls import url
 from django.contrib.auth.views import login, logout_then_login
-
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte
+from padres.views import Index2
+#para las fotos
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-]
+    url(r'^$',Index, name='index'),
+    url(r'^index2',Index2, name='index2'),
+    #url para alumnos 
+    url(r'^alumnos/detalles',AlumnoReporte.as_view(),name='alumnos_reporte'),
+    url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
+    #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
+
+	]
+#para las fotos
+if settings.DEBUG:
+    urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 	

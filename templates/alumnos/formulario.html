@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+	{%block title %} 
+		Formulario Alumno
+	{% endblock %}
+
+	{% block content%}
+	
+		<h1> Este es el formulario para Alumnos </h1>
+		<form method = "POST">
+		{% csrf_token %}  
+		{{form.as_p}}
+
+		<br>
+
+		<input type ="submit" value = "Registrar">
+		<input type ="reset" value = "Cancelar">	
+	</form>
+
+{% endblock %}
