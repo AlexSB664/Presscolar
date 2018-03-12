@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+	{%block title %} 
+		Vista
+	{% endblock %}
+
+	{% block content%}
+	
+		<h1> Reporte no chafa </h1>
+
+			<div class="container">
+
+		<h1>Reporte de Personas</h1>
+
+		<table class = "table table-bordered">
+
+			<thead>
+
+				<tr>
+					<td>Nombre</td>
+					<td>Turores</td>
+					<td>Vigente</td>
+					<td>Fella de Ingreso</td>
+					<td>Observaciones</td>
+					<td>Foto</td>
+
+				</tr>
+
+			</thead>
+			
+			<tbody>
+
+				<tr>
+
+				{% for p in object_list %}
+					<td>{{ p.alu_nombre }}</td>
+					<td>{{ p.alu_tutores }}</td>
+					<td>{{ p.alu_vigente }}</td>
+					<td>{{ p.alu_fechaIngreso }}</td>
+					<td>{{ p.alu_observaciones }}</td>
+
+					{% if p.alu_foto %}
+						<td><img height="100" width="100" src="{{ p.alu_foto.url }}" class='img-responsive'/>
+						</td>
+		 			
+		 			{% endif %}
+					
+				</tr>
+
+			{% endfor %}
+
+			</tbody>
+
+		</table>
+
+
+			<br>
+
+			<a href="/">Volver</a>
+
+	</div>
+
+
+{% endblock %}

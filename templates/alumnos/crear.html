@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+	{%block title %} 
+		Formulario Alumno
+	{% endblock %}
+
+	{% block content%}
+	
+	<h1>Formulario de prueba con alumnos</h1>
+	    {% block main %}
+    <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
+        <table>
+            {{form.as_table}}   
+        </table>
+        <input type="submit" name="crear" value="Crear">
+    </form> <br>
+    {% endblock main %}
+
+{% endblock %}
