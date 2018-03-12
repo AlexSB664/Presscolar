@@ -12,7 +12,7 @@ class Tutor(models.Model):
     tut_usuario = models.OneToOneField(User, on_delete=models.CASCADE, null = True)
     tut_correo = models.CharField(max_length = 15, null = True)
     tut_descripcion = models.CharField(max_length = 15, null = True)
-    tut_domicilio = models.CharField(max_length = 15, null = True)
+    tut_domicilio = models.CharField(max_length = 400, null = True)
     
     def __str__(self):
         return self.tut_nombre
