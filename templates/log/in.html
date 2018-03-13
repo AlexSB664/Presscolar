@@ -12,26 +12,24 @@
 
     <!-- Bootstrap core CSS -->
     <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
-
     <!-- Custom styles for this template -->
     <link href="{% static 'css/signin.css' %}" rel="stylesheet">
   </head>
 
   <body class="text-center">
-    <form class="form-signin">
+      {% if user.is_authenticated %}
+       <meta http-equiv="refresh" content="0; URL='login' />
+      {% endif %}
+    <form class="form-signin" method="POST">
+    {% csrf_token %}
       <img class="mb-4" src="media/default/default.jpg" alt="" width="72" height="72">
-      <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-      <label for="inputEmail" class="sr-only">Email address</label>
-      <input id="inputEmail" class="form-control" placeholder="Email address" required="" autofocus="" type="email">
+      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
+      <label for="inputEmail" class="sr-only">Nombre de usuario</label>
+      <input id="inputEmail" name="username" class="form-control" placeholder="Nombre de usuario"  autofocus="" type="text">
       <label for="inputPassword" class="sr-only">Password</label>
-      <input id="inputPassword" class="form-control" placeholder="Password" required="" type="password">
-      <div class="checkbox mb-3">
-        <label>
-          <input value="remember-me" type="checkbox"> Remember me
-        </label>
-      </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-      <p class="mt-5 mb-3 text-muted">© 2017-2018</p>
+      <input id="inputPassword" name="password" class="form-control" placeholder="Contrasena" required="" type="password">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      <p class="mt-5 mb-3 text-muted">© 2017-2018 Prescolapp</p>
     </form>
   
 

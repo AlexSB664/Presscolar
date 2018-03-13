@@ -19,26 +19,21 @@
 <body>
         {% if user.is_authenticated %}
         <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">
-             Bienvenido {{ user.username }}
-            </a>
+      <a class="navbar-brand" href="#"> {{ user.first_name }} </a>
       <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Dashboard <span class="sr-only">(current)</span></a>
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Notifications</a>
+            <a class="nav-link" href="/alumnos/detalles">Alumnos</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Profile</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Switch account</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="http://example.com/" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
@@ -48,6 +43,9 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </li>
+                      <li class="nav-item">
+            <a class="nav-link" href="cerrar">Salir</a>
+          </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
@@ -56,7 +54,7 @@
       </div>
     </nav>
 
-        {% else %} {% url 'login' %} {% endif %}
+        {% else %} <meta http-equiv="refresh" content="0; URL='/login' /> {% endif %}
 {% block content %}
 {% endblock %}
 </body>

@@ -26,17 +26,16 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    url(r'login/', login, {'template_name': 'log/in.html'}, name='login'),
     url(r'^$',Index, name='index'),
     #url(r'^index2',Index2, name='index2'),
     #url para alumnos 
     url(r'^alumnos/detalles',AlumnoReporte.as_view(),name='alumnos_reporte'),
     url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
-    url(r'^login',LogIn,name='login'),
-    
+    url(r'^cerrar', logout_then_login, name='logout' ),
     #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
 
 	]
 #para las fotos
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-	

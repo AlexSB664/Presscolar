@@ -130,6 +130,3 @@ LOGOUT_URL = reverse_lazy('logout')
 #Para las fotos
 MEDIA_URL = '/media/'
 
-#from django.contrib.auth.views import login, logout_then_login
-#    path(r'', login, {'template_name': 'home/index.html'}, name='login'),
-#    path(r'cerrar', logout_then_login, name='logout' ),
