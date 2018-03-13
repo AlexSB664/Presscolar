@@ -10,7 +10,7 @@ class alumnos(models.Model):
     alu_vigente = models.BooleanField(default = False)
     alu_fechaIngreso = models.DateField(auto_now_add = True, null=True)
     alu_observaciones = models.CharField(max_length = 2000, null=True)
-    alu_foto = models.ImageField(upload_to='media/fotosAlu', null=True)
+    alu_foto = models.ImageField(upload_to='media/fotosAlu', null=True, default='media/default/default.jpeg')
     
     def __str__(self):
         return self.alu_nombre
