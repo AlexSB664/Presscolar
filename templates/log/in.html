@@ -18,11 +18,11 @@
 
   <body class="text-center">
       {% if user.is_authenticated %}
-       <meta http-equiv="refresh" content="0; URL='login' />
+      <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../alumnos/detalles"> 
       {% endif %}
     <form class="form-signin" method="POST">
     {% csrf_token %}
-      <img class="mb-4" src="media/default/default.jpg" alt="" width="72" height="72">
+      <img class="mb-4" src="/media/media/default/default.jpeg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
       <label for="inputEmail" class="sr-only">Nombre de usuario</label>
       <input id="inputEmail" name="username" class="form-control" placeholder="Nombre de usuario"  autofocus="" type="text">
