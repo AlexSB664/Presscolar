@@ -8,10 +8,12 @@
  {% load staticfiles %}
     <head>
    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}"/>
-   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
-    <link rel="stylesheet" href="{% static 'css/favicon.ico' %}">    <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">  <!-- Custom styles for this template -->
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+   <script src="{% static 'js/popper.min.js' %}"></script>
+   <script src="{% static 'js/popper.js' %}"></script>
+
     <title>{% block title %}
         {% endblock %}</title>
         {% block archivos %}{% endblock %}
@@ -54,9 +56,11 @@
       </div>
     </nav>
 
-        {% else %} <meta http-equiv="refresh" content="0; URL='../login' /> {% endif %}
+        {% else %} <meta http-equiv="refresh" content="0;URL=../login" /> {% endif %}
 {% block content %}
 {% endblock %}
+<script src="{% static 'js/popper.min.js' %}"></script>
+<script src="{% static 'js/popper.js' %}"></script>
 </body>
 </html>
 

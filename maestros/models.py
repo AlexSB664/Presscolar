@@ -11,7 +11,7 @@ class maestros(models.Model):
     mae_fechaNacimento = models.DateField()
     
     def __str__(self):
-        return self.mae_nombre
+        return str(self.mae_nombre)
 
 class grupos(models.Model):
     gru_clave = models.CharField(max_length = 10)
@@ -22,6 +22,14 @@ class grupos(models.Model):
     
     def __str__(self):
         return self.gru_clave
+
+class grupoAlumno(object):
+    grupoFo = models.ForeignKey(grupos,on_delete=models.CASCADE,related_name="Grupo")
+    """docstring for grupoAlumno"""
+    def __init__(self, arg):
+        super(grupoAlumno, self).__init__()
+        self.arg = arg
+        
     
 class DiarioTrabajo(models.Model):
     DT_maestro = models.ForeignKey(maestros, on_delete = models.CASCADE)
@@ -32,7 +40,7 @@ class DiarioTrabajo(models.Model):
     DT_necesidades = models.CharField(max_length = 2000)
     
     def __str__(self):
-        return self.DT_alumno
+        return str(self.DT_alumno)
     
     
     
