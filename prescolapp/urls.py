@@ -18,7 +18,8 @@ from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout_then_login
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte
-from padres.views import LogIn
+from maestros.views import RegisterMaestro
+from padres.views import LogIn, Index2
 #para las fotos
 from django.conf import settings
 from django.conf.urls.static import static
@@ -28,12 +29,13 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'login/', login, {'template_name': 'log/in.html'}, name='login'),
     url(r'^$',Index, name='index'),
-    #url(r'^index2',Index2, name='index2'),
+    url(r'^index2',Index2, name='index2'),
     #url para alumnos 
     url(r'^alumnos/detalles',AlumnoReporte.as_view(),name='alumnos_reporte'),
     url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
     url(r'^cerrar', logout_then_login, name='logout' ),
     #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
+    url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),
 
 	]
 #para las fotos
