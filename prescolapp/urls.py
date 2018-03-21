@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout_then_login
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte,ReporteNoChafa
 from maestros.views import RegisterMaestro
 from padres.views import LogIn, Index2
 #para las fotos
@@ -33,6 +33,7 @@ urlpatterns = [
     #url para alumnos 
     url(r'^alumnos/detalles',AlumnoReporte.as_view(),name='alumnos_reporte'),
     url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
+    url(r'^alumnos/paginador',ReporteNoChafa.as_view(),name='alumnos_pagina'),
     url(r'^cerrar', logout_then_login, name='logout' ),
     #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
     url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),

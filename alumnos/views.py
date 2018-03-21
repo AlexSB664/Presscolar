@@ -23,3 +23,8 @@ class AlumnoCreate(CreateView):
 class AlumnoReporte(ListView):
 	template_name = "alumnos/reporte.html"
 	model = alumnos
+
+class ReporteNoChafa(ListView):
+	template_name="alumnos/reporte_no_chafa.html"
+	model = alumnos #alumnos.object.all()
+	paginate_by = 5
