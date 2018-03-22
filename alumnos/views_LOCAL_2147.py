@@ -26,7 +26,6 @@ class AlumnoCreate(CreateView):
 class AlumnoReporte(ListView):
 	template_name = "alumnos/reporte.html"
 	model = alumnos
-<<<<<<< HEAD
     
 def busquedaTurores(request):
     if  request.method == 'GET':
@@ -38,10 +37,3 @@ def busquedaTurores(request):
     
     print(data)
     return HttpResponse(data, 'application/json')
-=======
-
-class ReporteNoChafa(ListView):
-	template_name="alumnos/reporte_no_chafa.html"
-	model = alumnos #alumnos.object.all()
-	paginate_by = 5
->>>>>>> 9c70720d0961133d2dbbe70e5317ff3fa58cefa2

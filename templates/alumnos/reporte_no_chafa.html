@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+	{%block title %} 
+		Alumnos
+	{% endblock %}
+
+	{% block content%}
+
+		{% for alumnos in object_list %}
+			{{alumnos.alu_nombre}}
+		{% endfor %}
+		{% if page_obj.has_previous %}
+		<a href="/alumnos/paginador/?page={{page_obj.previous_page_number}}">pagina{{page_obj.previous_page_number}}</a>
+			
+		
+		{% endif %}
+		{% if page_obj.has_next %}
+                    <a href="/alumnos/paginador/?page={{page_obj.next_page_number}}">pagina{{page_obj.next_page_number}}</a>
+        {% endif %}
+
+{% endblock %}
