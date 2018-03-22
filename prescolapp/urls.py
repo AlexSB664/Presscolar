@@ -17,11 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout_then_login
-<<<<<<< HEAD
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores
-=======
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte,ReporteNoChafa
->>>>>>> 9c70720d0961133d2dbbe70e5317ff3fa58cefa2
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno
 from maestros.views import RegisterMaestro
 from padres.views import LogIn, Index2
 #para las fotos
@@ -43,6 +39,7 @@ urlpatterns = [
     url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),
     url(r'^tutores/Alumno',RegisterMaestro.as_view(),name='maestro_agregar'),
     url(r'^tutores/busqueda',busquedaTurores,name='filtroTutores'),
+    url(r'^alumnos/Buscar', busquedaAlumno, name='filtroAlumno'),
 
 	]
 #para las fotos

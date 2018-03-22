@@ -26,22 +26,32 @@ class AlumnoCreate(CreateView):
 class AlumnoReporte(ListView):
 	template_name = "alumnos/reporte.html"
 	model = alumnos
-<<<<<<< HEAD
     
 def busquedaTurores(request):
     if  request.method == 'GET':
         filtro = request.GET['nombre']
-        data = serializers.serialize('json', Tutor.objects.filter(tut_nombre = filtro))
+        data = serializers.serialize('json', Tutor.objects.filter(tut_nombre__contains = filtro))
         
     else:
         data = ""
     
     print(data)
     return HttpResponse(data, 'application/json')
-=======
 
 class ReporteNoChafa(ListView):
 	template_name="alumnos/reporte_no_chafa.html"
 	model = alumnos #alumnos.object.all()
 	paginate_by = 5
->>>>>>> 9c70720d0961133d2dbbe70e5317ff3fa58cefa2
+
+def busquedaAlumno(request):
+    if request.method == 'GET':
+        filtro = request.GET['filtro']
+        #data = serializers.serialize('json', alumnos.objects.raw('SELECT alu_nombre, alu_vigente, alu_fechaIngreso, alu_foto, alu_observaciones FROM alumnos_alumnos A'      
+#                                                         ' LEFT JOIN alumnos_alumnos_alu_tutores atut ON A.id = atut.alumnos_id'
+ #                                                                ' LEFT JOIN padres_tutor PT ON atut.tutor_id = PT.id '))
+        data = serializers.serialize('json', alumnos.objects.filter(alu_nombre__contains = filtro))
+        
+    else:
+        data = ""
+        
+    return HttpResponse(data)

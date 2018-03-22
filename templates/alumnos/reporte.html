@@ -5,20 +5,25 @@
 	{% endblock %}
 
 	{% block content%}
-
 			<div class="container">
-
-		<h1>Reporte de Personas</h1>
-
-		<table class = "table table-bordered">
+		<h1>Alumnos registrados</h1>
+                <div class="form-inline margenes10">
+        <div class="form-group">
+            <label>Buscar:</label>
+            <input type="text" class="form-control" onkeyup="busquedaEnter(event)" id="inputBusqueda" />
+            <button class="btn btn-default" onclick="Buscar()">Buscar</button>
+        </div>        
+                </div>
+                
+		<table class = "table table-bordered" >
 
 			<thead>
 
 				<tr>
 					<td>Nombre</td>
-					<td>Turores</td>
-					<td>Vigente</td>
-					<td>Fella de Ingreso</td>
+					<!--<td>Tutores</td>
+					<td>Vigente</td>-->
+					<td>Fecha de Ingreso</td>
 					<td>Observaciones</td>
 					<td>Foto</td>
 
@@ -26,14 +31,18 @@
 
 			</thead>
 			
-			<tbody>
+			<tbody id="ResultadoTabla">
 
 				<tr>
 
 				{% for p in object_list %}
 					<td>{{ p.alu_nombre }}</td>
-					<td>{{ p.alu_tutores }}</td>
-					<td>{{ p.alu_vigente }}</td>
+					<!--<td>
+                        {% for obj in object_list.alu_tutores %}
+                        console.log({{ obj }})
+                        {% endfor %}
+                    </td>
+					<td>{{ p.alu_vigente }}</td>-->
 					<td>{{ p.alu_fechaIngreso }}</td>
 					<td>{{ p.alu_observaciones }}</td>
 
@@ -55,9 +64,53 @@
 
 			<br>
 
-			<a href="/">Volver</a>
+			<a href="/" class="btn btn-default">Volver</a>
 
 	</div>
 
 
+{% endblock %}
+
+{% block loadFiles %}
+<script>
+function Buscar(){
+       
+    var valor = document.getElementById('inputBusqueda').value;
+    var x = new XMLHttpRequest();
+    x.open('GET','/alumnos/Buscar/?filtro=' + valor)
+    x.onreadystatechange = function (e) {
+    if (x.readyState == 4) {
+        if (x.status === 200) {
+            x.addEventListener('load', function(e){       
+                var jsonData = JSON.parse(x.responseText)
+                iterarObjeto(jsonData);
+            });
+        } else {
+            console.error(x.status);
+            }
+    }
+    }
+    x.send();
+}
+  
+function busquedaEnter(e){
+    if(e.keyCode == 13){
+        Buscar();
+    }
+}
+    
+function iterarObjeto(obj){
+    document.getElementById('ResultadoTabla').innerHTML = '';
+    for(i = 0; i < obj.length; i++){
+        var tr = document.createElement('tr');
+        tr.innerHTML ='<td>' + obj[i].fields.alu_nombre + '</td>'+
+            //'<td>' + obj[i].fields.alu_vigente + '</td>'+
+            '<td>' + obj[i].fields.alu_fechaIngreso + '</td>'+
+            '<td>' + obj[i].fields.alu_observaciones + '</td>'+
+            '<td><img height="100" width="100" src="/media/'+obj[i].fields.alu_foto + '" class="img-responsive"/></td>';
+        
+        document.getElementById('ResultadoTabla').appendChild(tr);
+    }
+}
+</script>
 {% endblock %}
