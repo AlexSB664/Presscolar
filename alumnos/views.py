@@ -3,6 +3,9 @@ from alumnos.models import alumnos
 from django.views.generic import CreateView, ListView
 from alumnos.forms import Alumno_Form
 from django.urls import reverse_lazy
+from django.core import serializers
+from django.http import JsonResponse, HttpResponse
+from padres.models import Tutor
 
 def Index(request):
 	return render(request,'alumnos/index.html')
@@ -23,3 +26,14 @@ class AlumnoCreate(CreateView):
 class AlumnoReporte(ListView):
 	template_name = "alumnos/reporte.html"
 	model = alumnos
+    
+def busquedaTurores(request):
+    if  request.method == 'GET':
+        filtro = request.GET['nombre']
+        data = serializers.serialize('json', Tutor.objects.filter(tut_nombre = filtro))
+        
+    else:
+        data = ""
+    
+    print(data)
+    return HttpResponse(data, 'application/json')

@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load staticfiles %}
 	{%block title %} 
 		Formulario Alumno
 	{% endblock %}
@@ -8,12 +8,45 @@
 	
 	<h1>Formulario de prueba con alumnos</h1>
 	    {% block main %}
+
     <form action="" enctype="multipart/form-data" method="POST">{% csrf_token %}
         <table>
             {{form.as_table}}   
         </table>
         <input type="submit" name="crear" value="Crear">
     </form> <br>
-    {% endblock main %}
 
+<input id="inputFiltroTutor"/>
+    {% endblock main %}
+{% endblock %}
+{% block loadFiles %}
+<script src="{% static '/js/Alumnos/crearAlumno.js' %}"></script>
+<script>
+$("#inputFiltroTutor").change(function(){
+    var valor = $(this).val();
+    var x = new XMLHttpRequest();
+    x.open('GET','/tutores/busqueda/?nombre=' + valor)
+    x.onreadystatechange = function (e) {
+  if (x.readyState == 4) {
+    if (x.status === 200) {
+        x.addEventListener('load', function(e){
+                           
+            console.log(JSON.parse(x.response));
+                           });
+        } else {
+            console.error(x.status);
+        }
+    }
+    };
+    x.send();
+    //$.ajax({
+    //    url: '/tutores/busqueda',
+    //    data: {
+    //        'nombre':valor
+    //          },
+    //    dataType: 'json',
+    //    success: function(data){ console.log(data);}
+    //});
+});
+</script>
 {% endblock %}
