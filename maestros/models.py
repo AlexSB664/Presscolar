@@ -1,8 +1,16 @@
 from django.db import models
 from alumnos.models import alumnos
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser,Group,Permission
+from django.db.models.manager import EmptyManager
 
 # Create your models here.
+class User(AbstractUser):
+    es_padre = models.BooleanField('estado de padre', default=False)
+    es_maes = models.BooleanField('estado de maestro', default=False)
+    groups = EmptyManager(Group)
+    user_permissions = EmptyManager(Permission)
+
+
 
 class maestros(models.Model):
     mae_nombre = models.OneToOneField(User, on_delete= models.CASCADE)
