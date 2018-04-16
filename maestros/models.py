@@ -25,6 +25,7 @@ class grupos(models.Model):
 
 class grupoAlumno(object):
     grupoFo = models.ForeignKey(grupos,on_delete=models.CASCADE,related_name="Grupo")
+    grupoAlu = models.ManyToManyField(alumnos)
     """docstring for grupoAlumno"""
     def __init__(self, arg):
         super(grupoAlumno, self).__init__()

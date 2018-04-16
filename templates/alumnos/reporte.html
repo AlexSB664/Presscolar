@@ -14,11 +14,8 @@
             <button class="btn btn-default" onclick="Buscar()">Buscar</button>
         </div>        
                 </div>
-                
 		<table class = "table table-bordered" >
-
 			<thead>
-
 				<tr>
 					<td>Nombre</td>
 					<!--<td>Tutores</td>
@@ -26,15 +23,11 @@
 					<td>Fecha de Ingreso</td>
 					<td>Observaciones</td>
 					<td>Foto</td>
-
+					<td>--</td>
 				</tr>
-
 			</thead>
-			
 			<tbody id="ResultadoTabla">
-
 				<tr>
-
 				{% for p in object_list %}
 					<td>{{ p.alu_nombre }}</td>
 					<!--<td>
@@ -45,34 +38,47 @@
 					<td>{{ p.alu_vigente }}</td>-->
 					<td>{{ p.alu_fechaIngreso }}</td>
 					<td>{{ p.alu_observaciones }}</td>
-
 					{% if p.alu_foto %}
 						<td>
-							<img height="100" width="100" src="{{ p.alu_foto.url }}" class='img-responsive'/>
+							<img height="100" width="100" src="{{ p.alu_foto.url }}" data-toggle="modal" data-target="#modalImagen" title="Ver foto" onclick="obtenerFoto(this)" class='img-responsive clickPointer'/>
+                            
 						</td>
-		 			
 		 			{% endif %}
-					
+                    <td onclick="window.location('/detalleAlumno/{{p.slug}}')"><i class="glyphicon glyphicon-search"></i></td>
 				</tr>
-
 			{% endfor %}
-
 			</tbody>
-
 		</table>
-
-
 			<br>
-
 			<a href="/" class="btn btn-default">Volver</a>
-
 	</div>
-
-
+<div class="modal" id="modalImagen" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Foto</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img height="100%" width="100%" src="" class='img-responsive' id="imgModal" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block loadFiles %}
 <script>
+function obtenerFoto(itm){
+    var ruta = itm.getAttribute('src');
+    document.getElementById('imgModal').setAttribute('src',ruta);
+}
+    
 function Buscar(){
        
     var valor = document.getElementById('inputBusqueda').value;
@@ -107,7 +113,8 @@ function iterarObjeto(obj){
             //'<td>' + obj[i].fields.alu_vigente + '</td>'+
             '<td>' + obj[i].fields.alu_fechaIngreso + '</td>'+
             '<td>' + obj[i].fields.alu_observaciones + '</td>'+
-            '<td><img height="100" width="100" src="/media/'+obj[i].fields.alu_foto + '" class="img-responsive"/></td>';
+            '<td><img height="100" width="100" src="/media/'+obj[i].fields.alu_foto + '" data-toggle="modal" data-target="#modalImagen" title="Ver foto" onclick="obtenerFoto(this)"  class="img-responsive clickPointer"/></td>'+
+        '<td onclick="window.location('+"/detalleAlumno/"+{{p.slug}}')"><i class="glyphicon glyphicon-search"></i></td>';
         
         document.getElementById('ResultadoTabla').appendChild(tr);
     }
