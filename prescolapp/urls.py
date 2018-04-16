@@ -17,8 +17,13 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
 from django.contrib.auth.views import login, logout_then_login
+<<<<<<< HEAD
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja
 from maestros.views import RegisterMaestro
+=======
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno
+from maestros.views import StudentSignUpView
+>>>>>>> c7fb6225927aabd5e1457a3d2d16a180aff31cc5
 from padres.views import LogIn, Index2
 #para las fotos
 from django.conf import settings
@@ -36,8 +41,9 @@ urlpatterns = [
     url(r'^alumnos/paginador',ReporteNoChafa.as_view(),name='alumnos_pagina'),
     url(r'^cerrar', logout_then_login, name='logout' ),
     #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
-    url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),
-    url(r'^tutores/Alumno',RegisterMaestro.as_view(),name='maestro_agregar'),
+    #url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),
+    url(r'^maestros/agregar', StudentSignUpView.as_view(), name='student_signup'),
+    #url(r'^tutores/Alumno',RegisterMaestro.as_view(),name='maestro_agregar'),
     url(r'^tutores/busqueda',busquedaTurores,name='filtroTutores'),
     url(r'^alumnos/Buscar', busquedaAlumno, name='filtroAlumno'),
     path('detalleAlumno/<slug:slug>', Detail_ninja.as_view(), name='detail_view' ),

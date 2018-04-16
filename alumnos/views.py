@@ -43,6 +43,18 @@ class ReporteNoChafa(ListView):
 	model = alumnos #alumnos.object.all()
 	paginate_by = 5
 
+    #def get_context_data(self,**kwargs):
+    #    obj = self.get_object()
+    #    dic={
+    #        "name:"obj.name.username,
+    #        "aldea:"obj.aldea,
+    #        "nature chakra:"obj.nature_chakra
+    #    }
+    #    return dic
+    #
+    #def render_to_response(self):
+    #    return self
+    #
 def busquedaAlumno(request):
     if request.method == 'GET':
         filtro = request.GET['filtro']
