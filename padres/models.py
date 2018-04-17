@@ -13,6 +13,7 @@ class Tutor(models.Model):
     tut_correo = models.CharField(max_length = 15, null = True)
     tut_descripcion = models.CharField(max_length = 15, null = True)
     tut_domicilio = models.CharField(max_length = 400, null = True)
+    tut_usurio = models.CharField(max_length = 18, default = 'papasito')
     
     def __str__(self):
         return self.tut_nombre

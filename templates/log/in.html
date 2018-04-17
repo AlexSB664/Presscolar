@@ -20,7 +20,8 @@
       {% if user.is_authenticated %}
       <META HTTP-EQUIV="REFRESH" CONTENT="0;URL=../alumnos/detalles"> 
       {% endif %}
-    <form class="form-signin" method="POST">
+          <script> alert({msg})</script>
+    <form class="form-signin" action="/login/" method="POST">
     {% csrf_token %}
       <img class="mb-4" src="/media/media/default/default.jpeg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
@@ -28,6 +29,15 @@
       <input id="inputEmail" name="username" class="form-control" placeholder="Nombre de usuario"  autofocus="" type="text">
       <label for="inputPassword" class="sr-only">Password</label>
       <input id="inputPassword" name="password" class="form-control" placeholder="Contrasena" required="" type="password">
+      <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
+      <p class="mt-5 mb-3 text-muted">© 2017-2018 Prescolapp</p>
+    </form>
+              <form class="form-signin" action="/inicio/padre" method="POST">
+    {% csrf_token %}
+      <img class="mb-4" src="/media/media/default/default.jpeg" alt="" width="72" height="72">
+      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesion</h1>
+      <label for="inputEmail" class="sr-only">Nombre de usuario</label>
+      <input id="inputEmail" name="code" class="form-control" placeholder="Nombre de usuario"  autofocus="" type="text">
       <button class="btn btn-lg btn-primary btn-block" type="submit">Entrar</button>
       <p class="mt-5 mb-3 text-muted">© 2017-2018 Prescolapp</p>
     </form>
