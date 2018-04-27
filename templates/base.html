@@ -6,8 +6,9 @@
     <meta name="description" content="">
     <meta name="author" content="">
  {% load staticfiles %}
+{% load inclusion_tags %}
     <head>
-   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">  <!-- Custom styles for this template -->
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
         
@@ -29,6 +30,7 @@
           <li class="nav-item">
             <a class="nav-link" href="/">Inicio</a>
           </li>
+    {% if perms.padres.is_teacher  %}
             <li class="nav-item">
            <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Grupos</a>
@@ -50,7 +52,7 @@
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tutores</a>
             <div class="dropdown-menu" aria-labelledby="dropdown01">
-              <a class="dropdown-item" href="#">Agregar</a>
+              <a class="dropdown-item" href="../padres/agregar">Agregar</a>
               <a class="dropdown-item" href="#">Modificar</a>
               <a class="dropdown-item" href="#">Buscar</a>
             </div>
@@ -62,7 +64,7 @@
               <a class="dropdown-item" href="/alumnos/detalles">Reporte</a>
             </div>
           </li>
-                    
+        {% endif %}
         </ul>
         <form class="form-inline my-2 my-lg-0">
          <!-- <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
@@ -78,6 +80,11 @@
 
         {% else %} <meta http-equiv="refresh" content="0;URL=../login" /> {% endif %}
     <div class="container">
+         {% if user.is_authenticated %}
+            {% if perms.padres.is_tutorr %}
+        {% infoAlumno %}
+            {% endif %}
+        {% endif %}
 {% block content %}
 {% endblock %}
     </div>

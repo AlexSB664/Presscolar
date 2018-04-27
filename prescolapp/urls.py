@@ -16,10 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url
-from django.contrib.auth.views import login, logout_then_login
+from django.contrib.auth.views import logout_then_login
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja
-from maestros.views import StudentSignUpView, agregarMaestro
-from padres.views import LogIn, Index2, iniciopadre
+from maestros.views import agregarMaestro #StudentSignUpView
+from padres.views import LogIn, Index2, login, addTutor
 #para las fotos
 from django.conf import settings
 from django.conf.urls.static import static
@@ -27,7 +27,7 @@ from django.views.static import serve
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'login/', login, {'template_name': 'log/in.html'}, name='login'),
+    url(r'login/', login, name='login'),
     url(r'^$',Index, name='index'),
     url(r'^index2',Index2, name='index2'),
     #url para alumnos 
@@ -35,15 +35,12 @@ urlpatterns = [
     url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
     url(r'^alumnos/paginador',ReporteNoChafa.as_view(),name='alumnos_pagina'),
     url(r'^cerrar', logout_then_login, name='logout' ),
-    #url(r'^alumnos/formulario/$',Alumno_Formulario, name='Alumno_Form'),
-    #url(r'^maestros/agregar',RegisterMaestro.as_view(),name='maestro_agregar'),
-    url(r'^maestros/agregar', StudentSignUpView.as_view(), name='student_signup'),
-    #url(r'^tutores/Alumno',RegisterMaestro.as_view(),name='maestro_agregar'),
+    #url(r'^maestros/agregar', StudentSignUpView.as_view(), name='student_signup'),
     url(r'^tutores/busqueda',busquedaTurores,name='filtroTutores'),
     url(r'^alumnos/Buscar', busquedaAlumno, name='filtroAlumno'),
     path('detalleAlumno/<slug:slug>', Detail_ninja.as_view(), name='detail_view' ),
     path('maestros/nuevo', agregarMaestro.as_view(), name="add_teacher"),
-    path('inicio/padre', iniciopadre, name='login_tutor' ),
+    url(r'^padres/agregar', addTutor.as_view(), name="AddTutor"),
 
 	]
 #para las fotos

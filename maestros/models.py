@@ -19,7 +19,7 @@ class maestros(models.Model):
     mae_fechaNacimento = models.DateField()
     
     def __str__(self):
-        return str(self.mae_nombre)
+        return str(self.mae_nombre.username)
 
 class grupos(models.Model):
     gru_clave = models.CharField(max_length = 10)
