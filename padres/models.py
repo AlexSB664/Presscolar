@@ -31,7 +31,7 @@ class Profesor(models.Model):
     pro_fechaNacimento = models.DateField(default = datetime.now, blank = True)
     
     def __str__(self):
-        return str(self.mae_nombre)
+        return str(self.pro_nombre.username)
     
     class Meta:
         
