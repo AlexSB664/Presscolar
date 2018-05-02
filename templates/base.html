@@ -82,7 +82,7 @@
     <div class="container">
          {% if user.is_authenticated %}
             {% if perms.padres.is_tutorr %}
-        {% infoAlumno %}
+                {{ data }}
             {% endif %}
         {% endif %}
 {% block content %}

@@ -6,6 +6,7 @@ from django.contrib import auth
 from django.http import HttpResponseRedirect
 from .forms import AddTutorForm
 from django.views import generic
+from alumnos.models import alumnos
 # Create your views here.
 def LogIn(request):    
 	return render(request,'log/in.html')
@@ -23,7 +24,9 @@ def login(request):
             auth.login(request, user)
             ctx = '';
             if user.has_perm('padres.is_teacher'):
-                ctx = {'data': 's'}
+                tut = Tutor.objects.get(username = user.username)
+                alm = alumnos.objects,get(alu_tutores = tut)
+                ctx = {'data': alm}
                 
             if user.has_perm('padres.is_tutorr'):
                 ctx = {'data':'s'}
