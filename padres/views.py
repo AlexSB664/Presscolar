@@ -23,13 +23,13 @@ def login(request):
         if user is not None:
             auth.login(request, user)
             ctx = '';
-            if user.has_perm('padres.is_teacher'):
-                tut = Tutor.objects.get(username = user.username)
-                alm = alumnos.objects,get(alu_tutores = tut)
-                ctx = {'data': alm}
-                
-            if user.has_perm('padres.is_tutorr'):
-                ctx = {'data':'s'}
+            #if user.has_perm('padres.is_teacher'):
+            #    #tut = Tutor.objects.get(username = user.username)
+            #    #alm = alumnos.objects,get(alu_tutores = tut)
+            #    #ctx = {'data': alm}
+            #    
+            #if user.has_perm('padres.is_tutorr'):
+            #    #ctx = {'data':'s'}
             
             return HttpResponseRedirect('/')
         else:

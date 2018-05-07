@@ -4,8 +4,22 @@
 <form method="POST">
 {% csrf_token %}
 {{form.as_p}}
-            <button type="submit">Registrar</button>
-            <button type="reset">Limpiar campos</button>
+    <!--
+    <div style="width: 50%;">
+    </div>
+    <div style="width: 50%; float: left;">
+        <div style="width: 100%;">
+        <label>Apellido paterno:</label>
+    {{form.paterno}}
+        </div>
+        <p>
+        <label>Apellido materno:</label>
+        {{form.materno}}
+        </p>
+    </div>
+-->
+            <button class="btn btn-success" type="submit">Registrar</button>
+            <button class="btn btn-danger" type="reset">Limpiar campos</button>
 </form>
 
 {% endblock %}
