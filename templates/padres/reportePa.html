@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block title%}Agregar maestro {% endblock %}
+{% block content %}
+{% load inclusion_tags %}
+
+{% for alumno in alumnos|tutor_filter:user.username %}
+    {{ alumno }}
+  {% endfor %}
+
+{% endblock %}
