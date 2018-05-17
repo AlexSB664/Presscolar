@@ -5,10 +5,26 @@ from alumnos.forms import Alumno_Form
 from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
-from padres.models import Tutor
+from padres.models import Tutor, Profesor
 
 def Index(request):
-	return render(request,'alumnos/index.html')
+    user = request.user
+    if user.is_active is True:
+        if user.is_staff is False :
+            if user.has_perm('padres.is_teacher'):
+                prf = Profesor.objects.filter(pro_nombre = user)
+                ctx = {'Grupo': 'a', 'Perfil': prf, 'Alumnos': 'akumos'}
+                
+            if user.has_perm('padres.is_tutorr'):
+                tur = Tutor.objects.get(tut_nombre = user)
+                alm = alumnos.objects.filter(alu_tutores__in = [tur])
+                ctx = {'Alumno':alm}        
+            
+            return render(request,'alumnos/index.html', ctx)
+        else:
+            return render(request,'alumnos/index.html')
+        
+    return render(request,'alumnos/index.html')
 
 
 #def Alumno_Formulario(request):

@@ -80,11 +80,6 @@
 
         {% else %} <meta http-equiv="refresh" content="0;URL=../login" /> {% endif %}
     <div class="container">
-         {% if user.is_authenticated %}
-            {% if perms.padres.is_tutorr %}
-                {{ data }}
-            {% endif %}
-        {% endif %}
 {% block content %}
 {% endblock %}
     </div>

@@ -22,18 +22,6 @@ def login(request):
         user = auth.authenticate(username = username, password = password)
         if user is not None:
             auth.login(request, user)
-            ctx = '';
-            if user.is_staff == False:    
-                if user.has_perm('padres.is_teacher'):
-                    #tut = Tutor.objects.get(username = user.username)
-                    #alm = alumnos.objects,get(alu_tutores = tut)
-                    print('aaaa')
-                    ctx = {'data': 'a'}
-                    
-                if user.has_perm('padres.is_tutorr'):
-                    print('aaaaSSSSS')
-                    ctx = {'data':'s'}
-                
             return HttpResponseRedirect('/')
         else:
             # Show an error page
