@@ -1,5 +1,0 @@
-SELECT * FROM alumnos_alumnos;
-SELECT id FROM auth_user WHERE username='jose' ;
-SELECT id FROM padres_tutor WHERE tut_nombre_id=7;
-SELECT alumnos_id FROM alumnos_alumnos_alu_tutores  WHERE tutor_id = 3;
-SELECT * FROM alumnos_alumnos WHERE id=1;
