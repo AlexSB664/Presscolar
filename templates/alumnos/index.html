@@ -1,21 +1,56 @@
  {% extends 'base.html' %}
-
-  {% block title %} Inicio {% endblock %}
+  {% block title %}Inicio - Bienvenido{% endblock %}
 
 {% block content %}
-    <main role="main" class="container">
-    </main>
+{% if user.is_staff is False %}
+{% if perms.padres.is_tutorr %}
+    {% for alm in Alumno %}
 
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="Offcanvas%20template%20for%20Bootstrap_files/jquery-3.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="Offcanvas%20template%20for%20Bootstrap_files/popper.js"></script>
-    <script src="Offcanvas%20template%20for%20Bootstrap_files/bootstrap.js"></script>
-    <script src="Offcanvas%20template%20for%20Bootstrap_files/holder.js"></script>
-    <script src="Offcanvas%20template%20for%20Bootstrap_files/offcanvas.js"></script>
-  
+<div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+<img src="{{ alm.alu_foto.url }}" class="card-img-top border-bottom"/>
+    <div class="card-body border-bottom">
+<h2 class="form-label text-center">Tutorado</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title">{{alm.alu_nombre}}</h4>
+            <h6>Fecha de ingreso: {{alm.alu_fechaIngreso}}</h6>
+            <p class="card-text">{{alm.alu_observaciones}}</p>
+        </div>
+    </div>
+</div>
 
-<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg>
+{%endfor%}
+    {% elif perms.padres.is_teacher %}
+{% for prf in Perfil %}
+    <div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+                    <div class="card-body border-bottom">
+                        <h2 class="form-label text-center">Perfil</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <h4 class="card-title">{{prf.pro_nombre.first_name}}</h4>
+                            <h6 class="card-text">{{prf.pro_apellidoPaterno}}</h6>
+                            <h6 class="card-text">{{prf.pro_apellidoMaterno}}</h6>
+                            <h6>Fecha de nacimiento: {{prf.pro_fechaNacimento}}</h6>
+                        </div>
+                    </div>
+        </div>
+        {% endfor %}
+        <!--{% for grp in Grupo %}
+        <div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+                    <div class="card-body border-bottom">
+                        <h2 class="form-label text-center">Grupo</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-inline form-group">
+                            <h4 class="card-title">{{grp.alu_nombre}}</h4>
+                            <h6>Fecha de ingreso: {{gpr.alu_fechaIngreso}}</h6>
+                            <p class="card-text">{{grp.alu_observaciones}}</p>
+                        </div>
+                    </div>
+        </div>
+        {% endfor %} -->
+    {% endif %}
+{% endif %}
 {% endblock %}
