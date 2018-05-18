@@ -15,15 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo
 from maestros.views import agregarMaestro #StudentSignUpView
 from padres.views import LogIn, Index2, login, addTutor
 #para las fotos
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.static import serve
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -32,7 +33,8 @@ urlpatterns = [
     url(r'^index2',Index2, name='index2'),
     #url para alumnos 
     url(r'^alumnos/detalles',AlumnoReporte.as_view(),name='alumnos_reporte'),
-    url(r'^alumnos/agregar',AlumnoCreate.as_view(),name='alumnos_agregar'),
+    url(r'^alumnos/agregar',AgregarAlumConEstilo.as_view(),name='alumnos_agregarxd'),
+    #url(r'^alumnos/agregar2',AlumnoCreate.as_view(),name='alumnos_agregar'),
     url(r'^alumnos/paginador',ReporteNoChafa.as_view(),name='alumnos_pagina'),
     url(r'^cerrar', logout_then_login, name='logout' ),
     #url(r'^maestros/agregar', StudentSignUpView.as_view(), name='student_signup'),
@@ -48,3 +50,7 @@ urlpatterns = [
 #para las fotos
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    import debug_toolbar
+    urlpatterns = [
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    ] + urlpatterns

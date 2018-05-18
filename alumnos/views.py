@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from alumnos.models import alumnos
-from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView
-from alumnos.forms import Alumno_Form
+from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView, FormView
+from alumnos.forms import Alumno_Form, Alumno_Chido
 from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
@@ -92,3 +92,22 @@ class Update_Alumno(UpdateView):
 class Detail_Alumno(DetailView):
     template_name="alumnos/detalleAlumno.html"
     model = alumnos
+
+class AgregarAlumConEstilo(FormView):
+    template_name = "alumnos/crear.html"
+    form_class = Alumno_Chido
+    success_url = reverse_lazy('index')
+    
+    def form_valid(self, form):
+        alu = alumnos()
+        alu.alu_nombre = form.cleaned_data['alu_nombre']
+        alu.alu_genero = form.cleaned_data['alu_genero']
+        #alu.alu_tutores = form.cleaned_data['alu_tutores']
+        alu.save()
+        alu.alu_tutores.set(form.cleaned_data['alu_tutores'])
+        alu.alu_vigente = form.cleaned_data['alu_vigente']
+        alu.alu_fechaIngreso = form.cleaned_data['alu_fechaIngreso']
+        alu_observaciones = form.cleaned_data['alu_observaciones']
+        slug = form.cleaned_data['slug']
+        alu.save()
+        return super(AgregarAlumConEstilo,self).form_valid(form)

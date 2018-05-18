@@ -21,9 +21,16 @@
     {% elif field.name == 'password2' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">Confirmar contraseña:</label>
           <input class="form-control col-sm-10" type="password" id="{{field.id}}" name="{{field.name}}" required />
+    {% elif field.name == 'alu_tutores' %}
+    <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
+    <!--<input class="form-control col-sm-10" id="{{field.id}}" name="{{field.name}}" required />-->
+    {{field}}
+    {% elif field.name == 'alu_fechaIngreso' %}
+    <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
+    {{field}}
     {% else %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
-          <input class="form-control col-sm-10" id="{{field.id}}" name="{{field.name}}" required />
+    <input class="form-control col-sm-10" id="{{field.id}}" name="{{field.name}}" required />
     {% endif %}
     </div>
     {% endfor %}
