@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from alumnos.models import alumnos
-from django.views.generic import CreateView, ListView,DetailView
+from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView
 from alumnos.forms import Alumno_Form
 from django.urls import reverse_lazy
 from django.core import serializers
@@ -81,4 +81,14 @@ def busquedaAlumno(request):
 
 class Detail_ninja(DetailView):
     template_name="amunlos/detalleAlumno.html"
+    model = alumnos
+    
+class Update_Alumno(UpdateView):
+    template_name = 'alumnos/updateA.html'
+    model = alumnos
+    fields = '__all__'
+    success_url = reverse_lazy('alumnos_reporte')
+    
+class Detail_Alumno(DetailView):
+    template_name="alumnos/detalleAlumno.html"
     model = alumnos

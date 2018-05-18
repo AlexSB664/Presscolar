@@ -6,7 +6,7 @@
 {% if perms.padres.is_tutorr %}
     {% for alm in Alumno %}
 
-<div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+<div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px">
 <img src="{{ alm.alu_foto.url }}" class="card-img-top border-bottom"/>
     <div class="card-body border-bottom">
 <h2 class="form-label text-center">Tutorado</h2>
@@ -23,7 +23,7 @@
 {%endfor%}
     {% elif perms.padres.is_teacher %}
 {% for prf in Perfil %}
-    <div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+    <div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px">
                     <div class="card-body border-bottom">
                         <h2 class="form-label text-center">Perfil</h2>
                     </div>
