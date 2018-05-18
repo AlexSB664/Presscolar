@@ -6,6 +6,7 @@ from django.urls import reverse
 
 class alumnos(models.Model):
     alu_nombre = models.CharField(max_length = 400)
+    alu_genero = models.CharField(max_length = 10,default="none")
     alu_tutores = models.ManyToManyField(Tutor)
     alu_vigente = models.BooleanField(default = True)
     alu_fechaIngreso = models.DateField(auto_now_add = True, null=True)
