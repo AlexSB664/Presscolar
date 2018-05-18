@@ -8,6 +8,7 @@
  {% load staticfiles %}
 {% load inclusion_tags %}
     <head>
+    <link href="{% static 'css/open-iconic-bootstrap.css' %}" rel="stylesheet">
    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
     <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
@@ -61,8 +62,7 @@
             <div class="dropdown-menu" aria-labelledby="dropdown03">
               <a class="dropdown-item" href="/alumnos/agregar">Agregar</a>
               <a class="dropdown-item" href="#">Calificar alumno</a>
-              <a class="dropdown-item" href="/alumnos/detalles">Reporte</a>
-            </div>
+              <a class="dropdown-item" href="/alumnos/detalles">Buscar</a>           </div>
           </li>
         {% endif %}
         </ul>
@@ -78,7 +78,7 @@
       </div>
     </nav>
 
-        {% else %} <meta http-equiv="refresh" content="0;URL=../login" /> {% endif %}
+        {% else %} <meta http-equiv="refresh" content="0; URL=../login" /> {% endif %}
     <div class="container">
 {% block content %}
 {% endblock %}
