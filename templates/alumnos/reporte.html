@@ -48,8 +48,8 @@
                             
 						</td>
 		 			{% endif %}
-                    <td onclick="window.location ='/detalles/{{p.slug}}'"><i class="glyphicon glyphicon-search"></i></td>
-                    <td onclick="window.location ='/updateAlumno/{{p.slug}}'"><i class="glyphicon glyphicon-search"></i></td>
+                    <td onclick="window.location ='/detalles/{{p.slug}}'" title="Mas informacion"><span class="oi oi-info"></span></td>
+                    <td onclick="window.location ='/updateAlumno/{{p.slug}}'" title="Actualizar datos"><span class="oi oi-pencil"  aria-hidden="true"></span></td>
 				</tr>
 			{% endfor %}
 			</tbody>
