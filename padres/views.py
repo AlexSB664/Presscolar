@@ -58,3 +58,8 @@ class addTutor(generic.FormView):
     #else:
      #   return HttpResponseRedirect('maestros/agregar/')
         
+def tutorAsign(request, slug):
+    dat = slug
+    almn = alumnos.objects.filter(slug = dat)
+    ctx = {'Alumno': almn}
+    return render(request, 'alumnos/alumnotutores.html', ctx)

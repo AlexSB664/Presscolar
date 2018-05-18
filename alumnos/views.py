@@ -26,6 +26,8 @@ def Index(request):
         
     return render(request,'alumnos/index.html')
 
+#import random, string
+#x = ''.join(random.SystemRandom().choice(string.ascii_uppercase + string.digits) for _ in range(16 ))
 
 #def Alumno_Formulario(request):
 #	form = Alumno_Form(request.POST or None)
