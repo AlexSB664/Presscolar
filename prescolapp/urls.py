@@ -19,7 +19,7 @@ from django.conf.urls import url
 from django.contrib.auth.views import logout_then_login
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno
 from maestros.views import agregarMaestro #StudentSignUpView
-from padres.views import LogIn, Index2, login, addTutor
+from padres.views import LogIn, Index2, login, addTutor, tutorAsign
 #para las fotos
 from django.conf import settings
 from django.conf.urls.static import static
@@ -43,7 +43,7 @@ urlpatterns = [
     url(r'^padres/agregar', addTutor.as_view(), name="AddTutor"),
     path('updateAlumno/<slug:slug>', Update_Alumno.as_view(), name="UpdateAlumno"),
     path('detalles/<slug:slug>', Detail_Alumno.as_view()),
-
+    path('addtutor/<slug:slug>', tutorAsign),
 	]
 #para las fotos
 if settings.DEBUG:
