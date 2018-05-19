@@ -22,4 +22,3 @@ class Alumno_Chido(forms.Form):
 	alu_vigente = forms.BooleanField(label='Vigente:', widget=forms.TextInput(attrs={'class':'form-control'}))
 	alu_fechaIngreso = forms.DateField(label='Fecha de Ingreso:',initial=datetime.date.today, widget=forms.TextInput(attrs={'type':'date'}))
 	alu_observaciones = forms.CharField(label='Observaciones:', widget=forms.TextInput(attrs={'class':'form-control'}))
-	slug = forms.SlugField(label='Metal Slug xdxdxdxdd:', widget=forms.TextInput(attrs={'class':'form-control'}))

@@ -110,6 +110,5 @@ class AgregarAlumConEstilo(FormView):
         alu.alu_vigente = form.cleaned_data['alu_vigente']
         alu.alu_fechaIngreso = form.cleaned_data['alu_fechaIngreso']
         alu_observaciones = form.cleaned_data['alu_observaciones']
-        slug = form.cleaned_data['slug']
         alu.save()
         return super(AgregarAlumConEstilo,self).form_valid(form)
