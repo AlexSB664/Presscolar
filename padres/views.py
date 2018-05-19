@@ -64,7 +64,7 @@ def tutorAsign(request, slug):
     for aln in almn.alu_tutores.all():
         ud = User.objects.get(username = aln)
         pad = Tutor.objects.get(tut_nombre = ud)
-        tutores.append({'Apellidos':pad.tut_apellidos,'Nombre': ud.first_name})
+        tutores.append({'Apellidos':pad.tut_apellidos})
     
     print(tutores)
     ctx = {'Alumno': almn, 'Padres': tutores}
