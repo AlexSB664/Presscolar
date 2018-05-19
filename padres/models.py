@@ -7,7 +7,7 @@ from datetime import datetime
 
 class Tutor(models.Model):
     tut_nombre = models.OneToOneField(User, on_delete=models.CASCADE, null= True)
-    tut_apellidos = models.CharField(max_length = 60, null = True)
+    tut_apellidos = models.CharField(max_length = 150, null = True)
     tut_numero = models.CharField(max_length = 15, null = True)
     tut_parentesco = models.CharField(max_length = 15, null = True)
     tut_descripcion = models.CharField(max_length = 15, null = True)

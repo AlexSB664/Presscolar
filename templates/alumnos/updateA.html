@@ -19,6 +19,18 @@
         <input type="text" class="form-control col-sm-10" name="{{form.alu_nombre.name}}" value="{{form.alu_nombre.value}}" />
         </div>
         <div class="form-inline form-group">
+            <label class="text-right justify-content-end control-label col-sm-2">Genero:</label>
+             <select class="custom-select col-sm-10" id="inputGroupSelect01">
+                {%if form.alu_genero.value == 'Femenino' %}
+                <option value="1" selected>Femenino</option>
+                <option value="2">Masculino</option>
+                {% else %}
+                <option value="1">Femenino</option>
+                <option value="2" selected>Masculino</option>
+                {% endif %}
+              </select> 
+        </div>
+        <div class="form-inline form-group">
         <label class="text-right justify-content-end control-label col-sm-2" for="alu_vi" >Vigente:</label> 
         <input type="checkbox" class="form-control" id="alu_vi" checked="{{form.alu_vigente.value}}" />
         </div>
@@ -27,7 +39,7 @@
        <div id="divTutores" style="display: none;">
         {{form.alu_tutores}}
        </div>
-       <ul class="list-group" id="slTutores" ></ul><span class="oi oi-pencil" style="color: #fe6265;" aria-hidden="true"></span>
+       <ul class="list-group" id="slTutores" ></ul><span class="oi oi-pencil" style="color: #fe6265;" onclick=" window.open('/addtutor/{{form.slug.value}}')" aria-hidden="true"></span>
         <script>
             s = document.getElementById('divTutores').children[0]
             for(var i = 0; i < s.childElementCount; i++){
