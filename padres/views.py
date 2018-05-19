@@ -41,13 +41,12 @@ class addTutor(generic.FormView):
         #password = request.POST['password']
         #Usr.username = username
         #Usr.password = password
-        Usr.first_name = form.cleaned_data['fname']
-        Usr.last_name = form.cleaned_data['lname']
         prm = Permission.objects.get(codename='is_tutorr')
         Usr.user_permissions.add(prm)
         #Usr.save()
         tut = Tutor()
         tut.tut_nombre = Usr
+        tut.tut_apellidos = form.cleaned_data['fname'] + ' ' + form.cleaned_data['lname'] + ' ' + form.cleaned_data['apellidoM']
         tut.tut_descripcion = form.cleaned_data['descrip']
         tut.tut_domicilio = form.cleaned_data['domicilio']
         tut.tut_numero = form.cleaned_data['telefono']
@@ -60,6 +59,13 @@ class addTutor(generic.FormView):
         
 def tutorAsign(request, slug):
     dat = slug
-    almn = alumnos.objects.filter(slug = dat)
-    ctx = {'Alumno': almn}
+    almn = alumnos.objects.get(slug = dat)
+    tutores = []
+    for aln in almn.alu_tutores.all():
+        ud = User.objects.get(username = aln)
+        pad = Tutor.objects.get(tut_nombre = ud)
+        tutores.append({'Apellidos':pad.tut_apellidos,'Nombre': ud.first_name})
+    
+    print(tutores)
+    ctx = {'Alumno': almn, 'Padres': tutores}
     return render(request, 'alumnos/alumnotutores.html', ctx)
