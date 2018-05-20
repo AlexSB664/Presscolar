@@ -131,4 +131,6 @@ LOGIN_REDIRECT_URL = reverse_lazy('index')
 LOGOUT_URL = reverse_lazy('logout')
 #Para las fotos
 MEDIA_URL = '/media/'
+INTERCEPT_REDIRECTS = False
+INTERNAL_IPS = ('127.0.0.1',)
 
