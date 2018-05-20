@@ -3,10 +3,12 @@ from .models import Tutor
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Permission
 from django.contrib import auth
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse, HttpResponse
 from .forms import AddTutorForm
 from django.views import generic
 from alumnos.models import alumnos
+import json
+from django.utils.datastructures import MultiValueDictKeyError
 # Create your views here.
 def LogIn(request):    
 	return render(request,'log/in.html')
@@ -28,6 +30,22 @@ def login(request):
             return  HttpResponseRedirect('login/')
     else:
         return render(request, 'log/in.html')
+
+def updateTutores(request):
+    if request.method == 'POST':
+        slug = request.POST['slug']
+        alm = alumnos.objects.get(slug = slug)
+        tuto = json.loads(request.POST['alu_tutores'])
+        alm.alu_tutores.clear()
+        alm.save()
+        for x in range(len(tuto)):
+            tut = (tuto[x]['Usuario'])
+            usu = User.objects.get(username = tut)
+            tutor = Tutor.objects.get(tut_nombre = usu)
+            alm.alu_tutores.add(tutor)
+        alm.save()
+    
+    return HttpResponseRedirect('/')
 
 class addTutor(generic.FormView):
     template_name = 'padres/agregar.html'
