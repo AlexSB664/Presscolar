@@ -93,3 +93,9 @@ def tutorAsign(request, slug):
 class TutoresReporte(generic.ListView):
     template_name = 'padres/reporte.html'
     model = Tutor
+
+def Detail_Tutor(request, slug):
+    tutnm = slug
+    usr = User.objects.get(username=tutnm)
+    tut = Tutor.objects.get(tut_nombre = usr)
+    
