@@ -34,6 +34,9 @@
     {% endif %}
     </div>
     {% endfor %}
+    <div style="display: none;">
+      <input id="slug" name="slug" />
+    </div>
       <div class="form-group ">
           <div class="d-flex justify-content-around">
             <button class="btn btn-success" type="submit">Registrar</button>
@@ -41,5 +44,13 @@
           </div>
     </div>
 </form>
+<script type="text/javascript">
+      function randomString(length, chars) {
+      var result = '';
+      for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
+    return result;
+}
+  document.getElementById('slug').value = randomString(24, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+</script>
 </div>
 {% endblock %}
