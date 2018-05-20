@@ -28,20 +28,36 @@
     {% elif field.name == 'alu_fechaIngreso' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
     {{field}}
+    {% elif field.name == 'alu_genero' %}
+    <div style="display: none;" >
+      {{field}}
+    </div>
+            <label class="text-right justify-content-end control-label col-sm-2">Genero:</label>
+             <select class="custom-select col-sm-10" id="inputGroupSelect01" onchange="changeFunc()" >
+                <option onclick="asignaGenero(this)" value="1">Femenino</option>
+                <option onclick="asignaGenero(this)" value="2" selected>Masculino</option>
+              </select> 
+    {% elif field.name == 'alu_vigente' %}
+      <div style="display: none;">
+      <input type="checkbox" id="id_alu_vigente" name="{{field.name}}" checked />
+    </div>
+      <label class="text-right justify-content-end control-label col-sm-2">Vigente:</label>
+      <input type="checkbox" id="inputCheck" onclick="change(this)"/>
+      {% elif field.name == 'slug' %}
+       <div style="display: none;">
+      {{field}}
+    </div>
     {% else %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
-    <input class="form-control col-sm-10" id="{{field.id}}" name="{{field.name}}" required />
+    <input class="form-control col-sm-10" name="{{field.name}}" required />
     {% endif %}
     </div>
     {% endfor %}
-    <div style="display: none;">
-      <input id="slug" name="slug" />
-    </div>
-      <div class="form-group ">
+    <div class="form-group ">
           <div class="d-flex justify-content-around">
-            <button class="btn btn-success" type="submit">Registrar</button>
-            <button class="btn btn-danger" type="reset">Limpiar campos</button>
-          </div>
+            <button  class="btn btn-success" type="submit">Guardar</button>
+            <button class="btn btn-danger" onclick="window.location = '/'" type="reset">Cancelar</button>
+        </div>
     </div>
 </form>
 <script type="text/javascript">
@@ -50,7 +66,31 @@
       for (var i = length; i > 0; --i) result += chars[Math.floor(Math.random() * chars.length)];
     return result;
 }
-  document.getElementById('slug').value = randomString(24, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+ function changeSlug(){
+  document.getElementById('id_slug').value = randomString(24, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ');
+ }
+ function changeFunc() {
+    var selectBox = document.getElementById("inputGroupSelect01");
+    var selectedValue = selectBox.options[selectBox.selectedIndex].value;
+    document.getElementById('id_alu_genero').value = (selectBox.children[selectedValue - 1].textContent)
+   }
+   
+  function change(itm){
+      if (itm.checked) {document.getElementById('id_alu_vigente').setAttribute('checked','')}else{
+        document.getElementById('id_alu_vigente').removeAttribute('checked')
+    }
+   }
+
+   function getStatus(){
+    if(document.getElementById('id_alu_vigente').getAttribute('checked') == null){ document.getElementById('inputCheck').removeAttribute('checked')  }
+        else{ document.getElementById('inputCheck').setAttribute('checked','') }
+    document.getElementById('id_alu_vigente').removeAttribute('required')
+   }
+   
+   getStatus();
+   changeFunc();
+   changeSlug();
+
 </script>
 </div>
 {% endblock %}

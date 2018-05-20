@@ -111,10 +111,16 @@ class AgregarAlumConEstilo(FormView):
         alu.alu_genero = form.cleaned_data['alu_genero']
         #alu.alu_tutores = form.cleaned_data['alu_tutores']
         alu.save()
+        gen = form.cleaned_data['alu_genero']
+        if gen == 'Masculino':
+            alu.alu_foto = 'media/default/boy.png'
+        else:
+            alu.alu_foto = 'media/default/girl.jpg'
         alu.alu_tutores.set(form.cleaned_data['alu_tutores'])
         alu.alu_vigente = form.cleaned_data['alu_vigente']
         alu.alu_fechaIngreso = form.cleaned_data['alu_fechaIngreso']
         alu_observaciones = form.cleaned_data['alu_observaciones']
+        alu.slug =form.cleaned_data['slug']
         alu.save()
         return super(AgregarAlumConEstilo,self).form_valid(form)
 
@@ -127,8 +133,8 @@ class EvaluarAlumno(FormView):
         alu = Evaluacion()
         alu.alu_nombre = form.cleaned_data['alu_nombre']
         alu.alu_genero = form.cleaned_data['alu_genero']
-        #alu.alu_tutores = form.cleaned_data['alu_tutores']
         alu.save()
+        #alu.alu_tutores = form.cleaned_data['alu_tutores']
         alu.alu_tutores.set(form.cleaned_data['alu_tutores'])
         alu.alu_vigente = form.cleaned_data['alu_vigente']
         alu.alu_fechaIngreso = form.cleaned_data['alu_fechaIngreso']
