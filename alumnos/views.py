@@ -6,11 +6,8 @@ from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
-<<<<<<< HEAD
 from maestros.models import Evaluacion
-=======
 import string
->>>>>>> refs/remotes/origin/master
 
 def Index(request):
     user = request.user
