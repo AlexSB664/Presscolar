@@ -27,7 +27,7 @@ def login(request):
             return HttpResponseRedirect('/')
         else:
             # Show an error page
-            return  HttpResponseRedirect('login/')
+            return render(request, 'log/in.html')
     else:
         return render(request, 'log/in.html')
 
