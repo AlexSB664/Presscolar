@@ -36,6 +36,7 @@ def Index(request):
 #		if form.is_valid():
 #			form.save()
 #	return render(request,'alumnos/formulario.html',{"form":form})
+
 class AlumnoCreate(CreateView):
 	model = alumnos
 	fields = "__all__"
