@@ -53,7 +53,7 @@ def busquedaTurores(request):
         filtro = request.GET['filtro']
         data =  Tutor.objects.select_related().filter(tut_apellidos__contains = filtro)
         for dt in data:
-            datos.append({"Usuario": str(dt.tut_nombre.username), 'Apellidos': str(dt.tut_apellidos)})
+            datos.append({"Usuario": str(dt.tut_nombre.username), 'Apellidos': str(dt.tut_apellidos), 'Numero':str(dt.tut_numero), 'Descripcion':str(dt.tut_descripcion)})
 
         data = serializers.serialize('json',data)
     else:

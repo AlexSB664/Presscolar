@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block title %}Tutores registrados{% endblock %}
+{% block content %}
+<div class="mt-3 mb-4 card border rounded border-warning">
+ <div class="card-body border-bottom">
+<h2 class="form-label text-center">Tutores registrados</h2>
+<p class="form-label text-justify font-italic">Se muestran los tutores registrados.</p>
+    </div>
+  <div class="mt-2 mb-2 form-inline">
+        	<label class="text-right justify-content-end control-label col-sm-2">Buscar:</label> 
+        	<input type="text" class="form-control" id="inputBusqueda" onkeypress="busquedaEnter(event)" />
+        </div>
+        <div class="pl-4 pr-4">
+<table id="tablaTutores" class="table table-bordered">
+    <thead>
+    <td>Nombre</td>
+    <td>Numero</td>
+    <td>Descripcion</td>
+    <td colspan="2">--</td>
+    </thead>
+    <tbody>
+{% for object in object_list %}
+<tr>
+    <td>{{object.tut_apellidos}}</td>
+    <td>{{object.tut_numero}}</td>
+    <td>{{object.tut_descripcion}}</td>
+    <td class="text-center" onclick="window.open('/detalles/tutor/{{object.tut_nombre}}')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>
+    <td class="text-center" onclick="window.open('/updateTutor/{{object.tut_nombre}}')" ><span     style="color: #fe6265;" class="oi oi-pencil"></span></td>
+</tr>
+{% endfor %}
+    </tbody>
+</table>
+</div>
+</div>
+<script type="text/javascript">
+	function Buscar(){
+    var valor = document.getElementById('inputBusqueda').value;
+    var x = new XMLHttpRequest();
+    x.open('GET','/tutores/busqueda/?filtro=' + valor)
+    x.onreadystatechange = function (e) {
+    if (x.readyState == 4) {
+        if (x.status === 200) {
+            x.addEventListener('load', function(e){
+                var jsonData = JSON.parse(x.responseText.replace(/\'/g,'"'))
+                iterarObjeto(jsonData);
+            });
+        } else {
+            console.error(x.status);
+            }
+    }
+    }
+    x.send();
+}
+  
+function busquedaEnter(e){
+    if(e.keyCode == 13){
+        Buscar();
+    }
+}
+var js 
+function iterarObjeto(obj){
+    document.getElementById('tablaTutores').children[1].innerHTML = '';
+    console.log(obj)
+    for(i = 0; i < obj.length; i++){
+        var tr = document.createElement('tr');
+        tr.innerHTML ='<td>' + obj[i].Apellidos +'</td>'+
+            '<td>' + obj[i].Numero + '</td>'+
+            '<td>' + obj[i].Descripcion + '</td>'+
+            '<td class="text-center" onclick="window.open(\'/detalles/'+obj[i].Usuario +')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>'+
+ 		 	'<td class="text-center" onclick="window.open(\'/updateAlumno/'+obj[i].Usuario +')" ><span style="color: #fe6265;" class="oi oi-pencil"></span></td>';
+        document.getElementById('tablaTutores').children[1].appendChild(tr);
+    }
+}
+</script>
+{% endblock %}

@@ -8,28 +8,6 @@ from django.views.generic import CreateView, FormView
 from .forms import StudentSignUpForm
 from padres.models import Profesor
 from django.contrib.auth.models import User, Permission
-
-# Create your views here.
-#class RegisterMaestro(generic.CreateView):
-#	template_name="maestros/create.html"
-#	model = models.maestros
-#	fields = "__all__"
-#	success_url = reverse_lazy("alumnos_reporte")
-
-#class StudentSignUpView(CreateView):
-#    model = models.User
-#    form_class = StudentSignUpForm
-#    template_name = 'maestros/create.html'
-#
-#    def get_context_data(self, **kwargs):
-#        kwargs['user_type'] = 'student'
-#        return super().get_context_data(**kwargs)
-#
-#    def form_valid(self, form):
-#        user = form.save()
-#        login(self.request, user)
-#        return redirect('students:quiz_list')
-
     
 class agregarMaestro(FormView):
     template_name = 'maestros/addTeacher.html'
@@ -43,6 +21,7 @@ class agregarMaestro(FormView):
         
         m = Profesor()
         m.pro_nombre = usr
+        m.pro_nombres = form.cleaned_data['nombres']
         m.pro_apellidoPaterno = form.cleaned_data["paterno"]
         m.pro_apellidoMaterno = form.cleaned_data["materno"]
         m.pro_fechaNacimento = form.cleaned_data["nacimiento"]

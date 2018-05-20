@@ -32,6 +32,7 @@ def login(request):
         return render(request, 'log/in.html')
 
 def updateTutores(request):
+    url = '/'
     if request.method == 'POST':
         slug = request.POST['slug']
         alm = alumnos.objects.get(slug = slug)
@@ -44,8 +45,9 @@ def updateTutores(request):
             tutor = Tutor.objects.get(tut_nombre = usu)
             alm.alu_tutores.add(tutor)
         alm.save()
-    
-    return HttpResponseRedirect('/')
+        url='/addtutor/' + str(slug)
+
+    return HttpResponseRedirect(url)
 
 class addTutor(generic.FormView):
     template_name = 'padres/agregar.html'
@@ -87,3 +89,7 @@ def tutorAsign(request, slug):
     print(tutores)
     ctx = {'Alumno': almn, 'Padres': tutores}
     return render(request, 'alumnos/alumnotutores.html', ctx)
+
+class TutoresReporte(generic.ListView):
+    template_name = 'padres/reporte.html'
+    model = Tutor

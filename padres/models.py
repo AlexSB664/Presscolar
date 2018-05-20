@@ -26,6 +26,7 @@ class Tutor(models.Model):
     
 class Profesor(models.Model):
     pro_nombre = models.OneToOneField(User, on_delete= models.CASCADE, null = True)
+    pro_nombres = models.CharField(max_length=80, default='s')
     pro_apellidoPaterno =models.CharField(max_length=70, default = 's')
     pro_apellidoMaterno = models.CharField(max_length=70, default = 's')
     pro_fechaNacimento = models.DateField(default = datetime.now, blank = True)
