@@ -1,16 +1,11 @@
 from django.shortcuts import render
 from alumnos.models import alumnos
 from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView, FormView
-from alumnos.forms import Alumno_Form, Alumno_Chido, Alumno_Eva
+from alumnos.forms import Alumno_Form, Alumno_Chido
 from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
-<<<<<<< HEAD
-from maestros.models import Evaluacion
-=======
-import string
->>>>>>> refs/remotes/origin/master
 
 def Index(request):
     user = request.user
@@ -40,7 +35,6 @@ def Index(request):
 #		if form.is_valid():
 #			form.save()
 #	return render(request,'alumnos/formulario.html',{"form":form})
-
 class AlumnoCreate(CreateView):
 	model = alumnos
 	fields = "__all__"
@@ -53,16 +47,14 @@ class AlumnoReporte(ListView):
     
 def busquedaTurores(request):
     if  request.method == 'GET':
-        datos = []
-        filtro = request.GET['filtro']
-        data =  Tutor.objects.select_related().filter(tut_apellidos__contains = filtro)
-        for dt in data:
-            datos.append({"Usuario": str(dt.tut_nombre.username), 'Apellidos': str(dt.tut_apellidos), 'Numero':str(dt.tut_numero), 'Descripcion':str(dt.tut_descripcion)})
-
-        data = serializers.serialize('json',data)
+        filtro = request.GET['nombre']
+        data = serializers.serialize('json', Tutor.objects.filter(tut_nombre__contains = filtro))
+        
     else:
         data = ""
-    return HttpResponse(str(datos))
+    
+    print(data)
+    return HttpResponse(data, 'application/json')
 
 class ReporteNoChafa(ListView):
 	template_name="alumnos/reporte_no_chafa.html"
@@ -110,24 +102,6 @@ class AgregarAlumConEstilo(FormView):
     
     def form_valid(self, form):
         alu = alumnos()
-        alu.alu_nombre = form.cleaned_data['alu_nombre']
-        alu.alu_genero = form.cleaned_data['alu_genero']
-        #alu.alu_tutores = form.cleaned_data['alu_tutores']
-        alu.save()
-        alu.alu_tutores.set(form.cleaned_data['alu_tutores'])
-        alu.alu_vigente = form.cleaned_data['alu_vigente']
-        alu.alu_fechaIngreso = form.cleaned_data['alu_fechaIngreso']
-        alu_observaciones = form.cleaned_data['alu_observaciones']
-        alu.save()
-        return super(AgregarAlumConEstilo,self).form_valid(form)
-
-class EvaluarAlumno(FormView):
-    template_name = "alumnos/evaluar.html"
-    form_class = Alumno_Eva
-    success_url = reverse_lazy('index')
-    
-    def form_valid(self, form):
-        alu = Evaluacion()
         alu.alu_nombre = form.cleaned_data['alu_nombre']
         alu.alu_genero = form.cleaned_data['alu_genero']
         #alu.alu_tutores = form.cleaned_data['alu_tutores']

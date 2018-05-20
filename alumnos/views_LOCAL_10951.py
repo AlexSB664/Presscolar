@@ -6,11 +6,7 @@ from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
-<<<<<<< HEAD
 from maestros.models import Evaluacion
-=======
-import string
->>>>>>> refs/remotes/origin/master
 
 def Index(request):
     user = request.user
@@ -40,7 +36,6 @@ def Index(request):
 #		if form.is_valid():
 #			form.save()
 #	return render(request,'alumnos/formulario.html',{"form":form})
-
 class AlumnoCreate(CreateView):
 	model = alumnos
 	fields = "__all__"
@@ -53,16 +48,14 @@ class AlumnoReporte(ListView):
     
 def busquedaTurores(request):
     if  request.method == 'GET':
-        datos = []
-        filtro = request.GET['filtro']
-        data =  Tutor.objects.select_related().filter(tut_apellidos__contains = filtro)
-        for dt in data:
-            datos.append({"Usuario": str(dt.tut_nombre.username), 'Apellidos': str(dt.tut_apellidos), 'Numero':str(dt.tut_numero), 'Descripcion':str(dt.tut_descripcion)})
-
-        data = serializers.serialize('json',data)
+        filtro = request.GET['nombre']
+        data = serializers.serialize('json', Tutor.objects.filter(tut_nombre__contains = filtro))
+        
     else:
         data = ""
-    return HttpResponse(str(datos))
+    
+    print(data)
+    return HttpResponse(data, 'application/json')
 
 class ReporteNoChafa(ListView):
 	template_name="alumnos/reporte_no_chafa.html"

@@ -118,6 +118,3 @@ class Evaluacion(models.Model):
     E_conocePropone = models.IntegerField(null=True)
     E_reconoceAmbien = models.IntegerField(null=True)
     E_identificaPeligro = models.IntegerField(null=True)
-
-
-
