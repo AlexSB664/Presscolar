@@ -22,35 +22,46 @@
 
 {%endfor%}
     {% elif perms.padres.is_teacher %}
-{% for prf in Perfil %}
-    <div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+    <div class="mr-md-3 mt-4 mb-4 card border rounded border border-success float-left " style="max-width:300px">
                     <div class="card-body border-bottom">
-                        <h2 class="form-label text-center">Perfil</h2>
+                        <h2 class="form-label text-center">Perfil <span style="color: #fe6265;" title="Modificar" class="oi oi-pencil" onclick="window.open('/actualiza/maestro/{{Perfil.pro_nombre}}')"></span></h2>
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <h4 class="card-title">{{prf.pro_nombre.first_name}}</h4>
-                            <h6 class="card-text">{{prf.pro_apellidoPaterno}}</h6>
-                            <h6 class="card-text">{{prf.pro_apellidoMaterno}}</h6>
-                            <h6>Fecha de nacimiento: {{prf.pro_fechaNacimento}}</h6>
+                            <h4 class="card-title">{{Perfil.pro_nombres}}</h4>
+                            <h6 class="card-text">{{Perfil.pro_apellidoPaterno}}</h6>
+                            <h6 class="card-text">{{Perfil.pro_apellidoMaterno}}</h6>
+                            <h6>Fecha de nacimiento: {{Perfil.pro_fechaNacimento}}</h6>
                         </div>
                     </div>
         </div>
-        {% endfor %}
-        <!--{% for grp in Grupo %}
-        <div class="mr-md-3 mt-3 mb-4 card border rounded border-warning float-left " style="max-width:300px">
-                    <div class="card-body border-bottom">
-                        <h2 class="form-label text-center">Grupo</h2>
-                    </div>
-                    <div class="card-body">
-                        <div class="form-inline form-group">
-                            <h4 class="card-title">{{grp.alu_nombre}}</h4>
-                            <h6>Fecha de ingreso: {{gpr.alu_fechaIngreso}}</h6>
-                            <p class="card-text">{{grp.alu_observaciones}}</p>
-                        </div>
-                    </div>
+        {% for gp in Grupos %}
+<div class="mr-md-3 mt-4 mb-4 card w-100 border rounded border-danger float-left " style="max-width:300px; height: 505px;">
+    <div class="card-body border-bottom">
+<h2 class="form-label text-center">Grupo</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title w-100">{{gp.gru_clave}}</h4>
+            <h6 class="w-100">total alumnos: {{gp.gru_alumnos.all|length}}</h6>
+            <h6 class="w-100">{{gp.gru_alumnos.alu_nombre.all}}</h6>
+            <h6 class="w-100">salon: {{gp.gru_salon}}</h6>
         </div>
-        {% endfor %} -->
-    {% endif %}
+            <h5 class="w-100">Alumnos</h5>
+        <div style="max-height: 242px; overflow-x: auto;">
+        <table >
+            <thead></thead>
+            <tbody>{% for x in gp.gru_alumnos.all %}
+                <tr><td>{{x.alu_nombre}}</td></tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        </div>
+    </div>
+</div>
+                {% endfor %}
+
+{% endif %}
 {% endif %}
 {% endblock %}

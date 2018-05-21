@@ -86,7 +86,6 @@ def tutorAsign(request, slug):
         pad = Tutor.objects.get(tut_nombre = ud)
         tutores.append({'Apellidos':pad.tut_apellidos})
     
-    print(tutores)
     ctx = {'Alumno': almn, 'Padres': tutores}
     return render(request, 'alumnos/alumnotutores.html', ctx)
 
@@ -98,4 +97,27 @@ def Detail_Tutor(request, slug):
     tutnm = slug
     usr = User.objects.get(username=tutnm)
     tut = Tutor.objects.get(tut_nombre = usr)
+    alum = alumnos.objects.filter(alu_tutores__in = [tut])
+    #tutorados = []
+    #for am in alum:
+    #    tutorados.append({"Nombre": am.alu_nombre, "Genero": am.alu_genero, "Observacion":am.alu_observaciones, "Foto": am.alu_foto, "Vigente": am.alu_vigente})
+
+    ctx = {"Tutor": tut, "Alumnos": alum}
+    return render(request, 'padres/detalletutor.html', ctx)
+
     
+def ActualizarTutores(request,slug):
+    usr= User.objects.get(username = slug)
+    tut = Tutor.objects.get(tut_nombre=usr)
+    if request.method == 'POST':
+        usr.set_password(request.POST['password1'])
+        usr.save()
+        tut.tut_apellidos = request.POST['nombre']
+        tut.tut_numero = request.POST['telefono']
+        tut.tut_parentesco = request.POST['parentesco']
+        tut.tut_descripcion = request.POST['descripcion']
+        tut.tut_domicilio = request.POST['domicilio']
+        tut.save()
+
+    ctx =  {'Tutor': tut, 'Usuario':usr}
+    return render(request, 'padres/actualizatutor.html', ctx )

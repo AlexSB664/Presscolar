@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
-{% block title %}Tutores registrados{% endblock %}
-{% block content %}
+{% block title %}Buscar maestros{% endblock %}
+{%block content%}
 <div class="mt-3 mb-4 card border rounded border-warning">
  <div class="card-body border-bottom">
 <h2 class="form-label text-center">Tutores registrados</h2>
@@ -11,21 +11,21 @@
         	<input type="text" class="form-control" id="inputBusqueda" onkeypress="busquedaEnter(event)" />
         </div>
         <div class="pl-4 pr-4">
-<table id="tablaTutores" class="table table-bordered">
+<table id="tablaMaestro" class="table table-bordered">
     <thead>
+    <td>Usuario</td>
     <td>Nombre</td>
-    <td>Numero</td>
-    <td>Descripcion</td>
+    <td>Fecha nacimiento</td>
     <td colspan="2">--</td>
     </thead>
     <tbody>
 {% for object in object_list %}
 <tr>
-    <td>{{object.tut_apellidos}}</td>
-    <td>{{object.tut_numero}}</td>
-    <td>{{object.tut_descripcion}}</td>
-    <td class="text-center" onclick="window.open('/detalles/tutor/{{object.tut_nombre}}')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>
-    <td class="text-center" onclick="window.open('/actualiza/tutor/{{object.tut_nombre}}')" ><span     style="color: #fe6265;" class="oi oi-pencil"></span></td>
+    <td>{{object.pro_nombre}}</td>
+    <td>{{object.pro_nombres}} {{object.pro_apellidoPaterno}} {{object.pro_apellidoPaterno}}</td>
+    <td>{{object.pro_fechaNacimento|date:"Y-m-d"}}</td>
+    <td class="text-center" onclick="window.open('/detalles/maestro/{{object.pro_nombre}}')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>
+    <td class="text-center" onclick="window.open('/actualiza/maestro/{{object.pro_nombre}}')" ><span     style="color: #fe6265;" class="oi oi-pencil"></span></td>
 </tr>
 {% endfor %}
     </tbody>
@@ -36,11 +36,12 @@
 	function Buscar(){
     var valor = document.getElementById('inputBusqueda').value;
     var x = new XMLHttpRequest();
-    x.open('GET','/tutores/busqueda/?filtro=' + valor)
+    x.open('GET','/maestros/busqueda/?filtro=' + valor)
     x.onreadystatechange = function (e) {
     if (x.readyState == 4) {
         if (x.status === 200) {
             x.addEventListener('load', function(e){
+            	//console.log(x.responseText.replace(/\'/g,'"'))
                 var jsonData = JSON.parse(x.responseText.replace(/\'/g,'"'))
                 iterarObjeto(jsonData);
             });
@@ -59,16 +60,16 @@ function busquedaEnter(e){
 }
 var js 
 function iterarObjeto(obj){
-    document.getElementById('tablaTutores').children[1].innerHTML = '';
+    document.getElementById('tablaMaestro').children[1].innerHTML = '';
     console.log(obj)
     for(i = 0; i < obj.length; i++){
         var tr = document.createElement('tr');
-        tr.innerHTML ='<td>' + obj[i].Apellidos +'</td>'+
-            '<td>' + obj[i].Numero + '</td>'+
-            '<td>' + obj[i].Descripcion + '</td>'+
+        tr.innerHTML ='<td>' + obj[i].Usuario +'</td>'+
+            '<td>' + obj[i].Nombre + '</td>'+
+            '<td>' + obj[i].Fecha + '</td>'+
             '<td class="text-center" onclick="window.open(\'/detalles/tutor/'+obj[i].Usuario +'\')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>'+
- 		 	'<td class="text-center" onclick="window.open(\'/actualiza/tutor/'+obj[i].Usuario +'\')" ><span style="color: #fe6265;" class="oi oi-pencil"></span></td>';
-        document.getElementById('tablaTutores').children[1].appendChild(tr);
+ 		 	'<td class="text-center" onclick="window.open(\'/actualiza/maestro/'+obj[i].Usuario +'\')" ><span style="color: #fe6265;" class="oi oi-pencil"></span></td>';
+        document.getElementById('tablaMaestro').children[1].appendChild(tr);
     }
 }
 </script>
