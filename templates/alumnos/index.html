@@ -71,7 +71,7 @@
                 {% for e in Evaluados %}
                 {%if e.Grupo == gp.id%}
                 {% for x in gp.gru_alumnos.all %}
-                {% if x.id not in e.Alumnos.0 %}
+                {% if x.id not in e.Alumnos %}
                     <tr>
                         <td>{{x.alu_nombre}}</td>
                         <td onclick="window.open('/evaluar/{{x.slug}}')" title="Evaluar"><span style="color: #e4a200;" class="oi oi-clipboard" aria-hidden="true"> </span></td>
@@ -94,10 +94,14 @@
                 {% for e in Evaluados %}
                 {%if e.Grupo == gp.id%}
                 {% for x in gp.gru_alumnos.all %}
-                {% if x.id in e.Alumnos.0 %}
+                {% if x.id in e.Alumnos %}
                     <tr>
                         <td>{{x.alu_nombre}}</td>
-                        
+                        {%for ev in e.EvalId %}
+                        {% if ev.IDA == x.id %}
+                        <td onclick="window.location ='/detalle/evaluacion/semanal/{{ev.EvaId}}'" title="Mas informacion"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
+                        {% endif %}
+                        {% endfor %}
                     </tr>
                   {% endif %}  
                 {% endfor %}

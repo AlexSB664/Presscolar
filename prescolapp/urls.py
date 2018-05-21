@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario, detalleEvalSem
 from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo, buscarSinGrupo, buscarGrupo, GrupoReporte, infoGrupo, actualizaGrupo,buscarEnelGrupo
 from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
@@ -63,7 +63,8 @@ urlpatterns = [
     path('detalles/grupos/<slug:slug>',infoGrupo),
     path('actualiza/grupo/<slug:slug>', actualizaGrupo ),
     path('buscar/alumnosSG/<slug:slug>/', buscarEnelGrupo),
-	]
+	path('detalle/evaluacion/semanal/<slug:slug>', detalleEvalSem)
+    ]
 #para las fotos
 if settings.DEBUG:
     urlpatterns+=static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
