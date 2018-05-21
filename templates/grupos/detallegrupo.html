@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}Informacion del grupo{% endblock %}
+{% block content %}
+<div class="mr-md-3 mt-4 mb-4 card w-100 border rounded border-danger float-left " style="max-width:300px; height: 505px;">
+    <div class="border-bottom">
+<h2 class="form-label text-center">Grupo</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title w-100">{{Grupo.gru_clave}}</h4>
+            <h6 class="w-100">salon: {{Grupo.gru_salon}}</h6>
+            <h6 class="w-100">Grado: {{Grupo.gru_grado}}</h6>
+            <h6 class="w-100">total alumnos: {{Grupo.gru_alumnos.all|length}}</h6>
+        </div>
+    </div>
+</div>
+<div class="mr-md-3 mt-4 mb-4 card w-100 border rounded border-success float-left " style="max-width:300px; height: 505px;">
+    <div class="border-bottom">
+<h2 class="form-label text-center">Profesor</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title w-100">{{Profesor.pro_nombres}}</h4>
+            <h6 class="w-100">{{Profesor.pro_apellidoPaterno}} {{Profesor.pro_apellidoMaterno}}</h6>
+            <h6 class="w-100">Usuario: {{Profesor.pro_nombre}}</h6>
+            <h6 class="w-100">Nacimiento: {{Profesor.pro_fechaNacimiento}}</h6>
+        </div>
+    </div>
+</div>
+<div class="mr-md-3 mt-4 mb-4 card w-100 border rounded border-warning float-left " style="max-width:300px; height: 505px;">
+    <div class=" border-bottom">
+<h2 class="form-label text-center">Alumnos</h2>
+    </div>
+    <div class="card-body">
+    	<div style="max-height: 390px; overflow-x: auto;">
+        <table >
+            <thead></thead>
+            <tbody>{% for x in Alumnos %}
+                <tr><td>{{x.alu_nombre}}</td>
+                		<td><span></span></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

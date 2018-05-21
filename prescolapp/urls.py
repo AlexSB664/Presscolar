@@ -18,7 +18,7 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno
-from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo
+from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo, buscarSinGrupo, buscarGrupo, GrupoReporte, infoGrupo, actualizaGrupo,buscarEnelGrupo
 from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
 from django.conf import settings
@@ -56,6 +56,12 @@ urlpatterns = [
     path('detalles/maestro/<slug:slug>', DetalleMaestro),
     path('maestros/busqueda/', buscarMaestros),
     path('grupo/crear', crearGrupo, name='crearGrupo'),
+    path('alumnosNG/busqueda/', buscarSinGrupo),
+    path('grupos/busqueda/', buscarGrupo),
+    path('grupo/buscar', GrupoReporte.as_view(), name='reporteGrupo'),
+    path('detalles/grupos/<slug:slug>',infoGrupo),
+    path('actualiza/grupo/<slug:slug>', actualizaGrupo ),
+    path('buscar/alumnosSG/<slug:slug>/', buscarEnelGrupo),
 	]
 #para las fotos
 if settings.DEBUG:

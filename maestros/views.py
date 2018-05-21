@@ -12,6 +12,8 @@ from django.http import JsonResponse, HttpResponse
 from django.db.models import Q
 from .models import grupos
 from alumnos.models import alumnos
+from django.core import serializers
+import json
 
 class agregarMaestro(FormView):
     template_name = 'maestros/addTeacher.html'
@@ -74,13 +76,111 @@ def DetalleMaestro(request, slug):
     ctx = {"Usuario":usr, "Profesor": prf, "Grupos": grp}
     return render(request, 'maestros/detallemaestro.html', ctx)
 
+def actualizaGrupo(request,slug):
+    ng = grupos.objects.select_related().get(id=slug)
+    maestro = Profesor.objects.exclude(pro_nombre = ng.gru_maestro.pro_nombre).all()
+    if request.method == 'POST':
+        us = User.objects.get(username= request.POST['maestro'])  
+        mae = Profesor.objects.get(pro_nombre = us)
+        ng.gru_clave = request.POST['clave']
+        ng.gru_salon = request.POST['salon']
+        ng.gru_maestro = mae
+        ng.gru_grado = int(request.POST['grado'])
+        ng.gru_alumnos.clear()
+        ng.save()
+        alms = json.loads(request.POST['alumnos'])
+        for j in range(len(alms)):
+            almSave = alumnos.objects.get(slug = alms[j]['slug'])    
+            ng.gru_alumnos.add(almSave)
+        ng.save()
+    
+
+    ng = grupos.objects.select_related().get(id = slug)
+    maestro = Profesor.objects.exclude(pro_nombre = ng.gru_maestro.pro_nombre).all()
+    alumnosGrupo = grupos.objects.select_related().get(id=slug)
+    datosAlumnos = []
+    for x in alumnosGrupo.gru_alumnos.all():
+        datosAlumnos.append({"slug":x.slug, "Nombre": x.alu_nombre})
+
+    ctx = {"Grupo":ng, "Maestro": ng.gru_maestro, "Profesores": maestro, "Alumnos": datosAlumnos}
+    return render(request, 'grupos/actualizagrupo.html', ctx)        
+
+def buscarEnelGrupo(request,slug):
+    if request.method == 'GET':
+        filtro = request.GET['filtro']
+        almg = grupos.objects.select_related().exclude(id=slug).all()
+        alm = []
+        for ix in almg:
+            for x in ix.gru_alumnos.all():
+                alm.append(x.id)
+
+        alumnosF = alumnos.objects.exclude(id__in = alm).filter(alu_nombre__contains = filtro)
+        data = serializers.serialize('json', alumnosF)
+
+    return HttpResponse(data)
+
+
+
 def crearGrupo(request):
+    if request.method == 'POST':
+        ng = grupos()
+        ng.gru_clave = request.POST['clave']
+        ng.gru_salon = request.POST['salon']
+        ng.gru_grado = int(request.POST['grado'])
+        ng.save()
+        alms = json.loads(request.POST['alumnos'])
+        for i in range(len(alms)):
+            addl = alumnos.objects.get(slug = alms[i]['slug'])
+            ng.gru_alumnos.add(addl)
+
+        ng.save()
+        us = User.objects.get(username = request.POST['maestro'])
+        pro = Profesor.objects.get(pro_nombre = us)
+        ng.gru_maestro = pro;
+        ng.save()
+
+
     gps = grupos.objects.select_related().all()
+    maes = Profesor.objects.all()
     data = []
     for gp in gps:
         for alm in gp.gru_alumnos.all():
             data.append(alm.slug)
-            
+    
 
     alm = alumnos.objects.exclude(slug__in = data).all()
-    return render(request, 'grupos/agregargrupo.html', {"Alumnos": alm})
+    return render(request, 'grupos/agregargrupo.html', {"Alumnos": alm, 'Maestros': maes})
+
+def buscarSinGrupo(request):
+    if request.method == 'GET':
+        filtro = request.GET['filtro']
+        gps = grupos.objects.select_related().all()
+        alums = []
+        for x in gps:
+            for alm in x.gru_alumnos.all():
+                alums.append(alm.slug)
+
+        alm = alumnos.objects.exclude(slug__in =alums).filter(alu_nombre__contains = filtro)
+        data = serializers.serialize('json',alm)
+
+    return HttpResponse(data)
+
+class GrupoReporte(generic.ListView):
+    template_name = 'grupos/reporte.html'
+    model = grupos
+
+def buscarGrupo(request):
+    if request.method == 'GET':
+        filtro = request.GET['filtro']
+        grp = grupos.objects.select_related().filter(Q(gru_salon__contains = filtro) |Q(gru_clave__contains = filtro))
+        tut = []
+        for x in grp:
+            tut.append({"Tutor": str(x.gru_maestro.pro_nombres + ' ' + x.gru_maestro.pro_apellidoPaterno), "Clave": x.gru_clave, "Salon": x.gru_salon, "Grado": x.gru_grado, "Id": x.id, "Alumnos": len(x.gru_alumnos.all())})
+
+    return HttpResponse(str(tut))
+
+def infoGrupo(request, slug):
+    grp = grupos.objects.select_related().get(id = slug)
+    ctx = {"Grupo": grp, "Alumnos": grp.gru_alumnos.all(), "Profesor": grp.gru_maestro}
+    return render(request, 'grupos/detallegrupo.html', ctx)
+        
