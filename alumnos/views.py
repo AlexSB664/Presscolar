@@ -8,16 +8,35 @@ from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
 from maestros.models import Evaluacion, grupos
 import string
+from datetime import date
 
 def Index(request):
     user = request.user
     if user.is_active is True:
         if user.is_staff is False :
             if user.has_perm('padres.is_teacher'):
+                hoy = date.today()
                 prf = Profesor.objects.get(pro_nombre = user)
                 grp = grupos.objects.select_related().filter(gru_maestro = prf)
-                ctx = {"Perfil": prf, "Grupos": grp}
-                
+                almGRUP = []
+                for k in grp:
+                    almGRUP.append({"Alumnos": k.gru_alumnos.all(), "Grupo": k.id})
+
+                evaluacionesArray = []
+                for j in range(len(almGRUP)):
+                    kj = []
+                    for hj in almGRUP[j]['Alumnos']:
+                        kj.append(hj.id)
+
+                    amevals = []
+                    evals =  Evaluacion.objects.filter(E_alumno__id__in = kj).filter(E_fecha = hoy)
+                    for nh in evals:
+                        amevals.append(nh.E_alumno.id)
+                        
+                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals})
+
+                ctx = {"Perfil": prf, "Grupos": grp, "Evaluados": evaluacionesArray}
+                print(ctx)
             if user.has_perm('padres.is_tutorr'):
                 tur = Tutor.objects.get(tut_nombre = user)
                 alm = alumnos.objects.filter(alu_tutores__in = [tur])
