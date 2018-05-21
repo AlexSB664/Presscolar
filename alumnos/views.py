@@ -148,6 +148,13 @@ class EvaluarAlumno(FormView):
     template_name = "alumnos/evaluar.html"
     form_class = Alumno_Eva
     success_url = reverse_lazy('index')
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(EvaluarAlumno, self).get_context_data(*args, **kwargs)
+        #ctx['slug'] = self.kwargs['slug'] # or Tag.objects.get(slug=...)
+        slug = self.kwargs['slug']
+        ctx ['alumno'] = alumnos.objects.get(slug=slug)
+        return ctx
     
     def form_valid(self, form):
         alu = Evaluacion()

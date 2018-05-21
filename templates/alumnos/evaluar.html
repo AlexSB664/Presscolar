@@ -9,10 +9,16 @@
     <div class="card-body border-bottom">
 <h2 class="form-label text-center">Evaluacion Semanal </h2>
 <p class="form-label text-justify font-italic">Evalua al alumno.</p>
+<p style="color:red;" class="form-label text-justify font-italic">Calificar con 1 si el alumno no lo hace.</p>
+<p style="color:blue;" class="form-label text-justify font-italic">Calificar con 2 si el frecuentemente lo hace</p>
+<p style="color:green;" class="form-label text-justify font-italic">Calificar con 3 si el alumno lo hace muy frecuentemente</p>
+
+
     </div>
 <form class="mt-3 container form-horizontal" method="POST">
 {% csrf_token %}
-	{% for field in form %}
+    
+    {% for field in form %}
      <div class="form-inline form-group">
     {% if field.name == 'E_fecha' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
@@ -22,7 +28,7 @@
     <input class="form-control col-sm-2"  readonly="True" id="{{field.id}}" name="{{field.name}}" value="{{user}}" required />
     {% elif field.name == 'E_alumno' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
-    <input class="form-control col-sm-2"  readonly="True" id="id={{field.id}}" name="{{field.name}}" value="" required />
+    <input class="form-control col-sm-2"  readonly="True" id="id={{field.id}}" name="{{field.name}}" value="{{alumno}}" required />
     {% else %}
     <label class="text-right justify-content-end control-label col-sm-5" for="{{ field.name }}">{{ field.label }}</label>
     {{field}}
