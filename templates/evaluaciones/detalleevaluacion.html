@@ -1,0 +1,609 @@
+{% extends 'base.html' %}
+{% block title %}Evaluacion{% endblokc %}
+{% block content %}
+<div class="mt-3 mb-4 card border rounded border-warning">
+    <div class="card-body border-bottom">
+<h2 class="form-label text-center">Evaluacion Semanal </h2>
+<p class="form-label text-justify font-italic">Evalua al alumno.</p>
+<p style="color:red;" class="form-label text-justify font-italic">Calificar con 1 si el alumno no lo hace.</p>
+<p style="color:blue;" class="form-label text-justify font-italic">Calificar con 2 si el frecuentemente lo hace</p>
+<p style="color:green;" class="form-label text-justify font-italic">Calificar con 3 si el alumno lo hace muy frecuentemente</p>
+    </div>    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-2" for="E_maestro">Maestro:</label>
+    <input class="form-control col-sm-2" readonly="True" id="" name="E_maestro" value="Maestra1" required="">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-2" for="E_alumno">Alumno:</label>
+    <input class="form-control col-sm-2" readonly="True" id="id=" name="E_alumno" value="Alexa Silva" required="">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-2" for="E_fecha">Fecha de evaluacion:</label>
+    <input type="date" name="E_fecha" value="2018-05-21" readonly="readonly" required="" id="id_E_fecha">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_comparte">Comparte libremente detalles cotidianos de su casa, escuela, comunidad:</label>
+    <input type="number" name="E_comparte" min="1" id="id_E_comparte" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_apoya">Apoya a los demás dando sugerencias para lograr realizarlo:</label>
+    <input type="number" name="E_apoya" min="1" id="id_E_apoya" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_pregunta">Realiza preguntas para dar solución a su curiosidad o duda:</label>
+    <input type="number" name="E_pregunta" min="1" id="id_E_pregunta" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_sugerencia">Acepta sugerencias en las actividades que lo requiere:</label>
+    <input type="number" name="E_sugerencia" min="1" id="id_E_sugerencia" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_controla">Controla coductas impulsivas de agresión fisica o verbales a sus compañeros:</label>
+    <input type="number" name="E_controla" min="1" id="id_E_controla" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_cuida">Cuida su persona de no lastimarse:</label>
+    <input type="number" name="E_cuida" min="1" id="id_E_cuida" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_espera">Espera su turno para intervenir, comparte materiales en las actividades:</label>
+    <input type="number" name="E_espera" min="1" id="id_E_espera" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_negocia">Negocia, argumenta las formas de trabajar las actividades con sus compañeros:</label>
+    <input type="number" name="E_negocia" min="1" id="id_E_negocia" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_trabajaEquipo">Trabaja en equipo:</label>
+    <input type="number" name="E_trabajaEquipo" min="1" id="id_E_trabajaEquipo" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_respeta">Respeta normas para la convivencia dentro y fuera del salón:</label>
+    <input type="number" name="E_respeta" min="1" id="id_E_respeta" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_cuidadoso">Es cuidadoso con sus pertenencias:</label>
+    <input type="number" name="E_cuidadoso" min="1" id="id_E_cuidadoso" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_involucra">Se involucra activamente en las actividades colectivas:</label>
+    <input type="number" name="E_involucra" min="1" id="id_E_involucra" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_iniciativa">Tiene iniciativa al realizar las actividades dentro y fuera del aula:</label>
+    <input type="number" name="E_iniciativa" min="1" id="id_E_iniciativa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_riesgo">Reconoce situaciones de riesgo:</label>
+    <input type="number" name="E_riesgo" min="1" id="id_E_riesgo" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_estrategias">Propone soluciones o estrategias para la solucionar algún conflicto o problema:</label>
+    <input type="number" name="E_estrategias" min="1" id="id_E_estrategias" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_seExpresa">Expresa sobre cómo se siente:</label>
+    <input type="number" name="E_seExpresa" min="1" id="id_E_seExpresa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_mencionaNombre">Menciona sus nombres completos y los de su familia:</label>
+    <input type="number" name="E_mencionaNombre" min="1" id="id_E_mencionaNombre" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_mencionaDomicilio">Menciyona sus datos de domicilio , teléfono y señas:</label>
+    <input type="number" name="E_mencionaDomicilio" min="1" id="id_E_mencionaDomicilio" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_expresaSentir">Expresa y comparte lo que provoca alegría, tristeza, temor asombro:</label>
+    <input type="number" name="E_expresaSentir" min="1" id="id_E_expresaSentir" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_exprasaSentimientos">Da a conocer lo que le agrada-disgusta, acuerdos y desacuerdos de algo (juegos, canciones, actividades):</label>
+    <input type="number" name="E_exprasaSentimientos" min="1" id="id_E_exprasaSentimientos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_recuerdaSusesos">Recuerda sucesos y los da a conocer a los demás:</label>
+    <input type="number" name="E_recuerdaSusesos" min="1" id="id_E_recuerdaSusesos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_solicitaPalabra">Solicita la palabra:</label>
+    <input type="number" name="E_solicitaPalabra" min="1" id="id_E_solicitaPalabra" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_respetaTurno">Respeta turnos de habla de los demás:</label>
+    <input type="number" name="E_respetaTurno" min="1" id="id_E_respetaTurno" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_explica">Explica las indicaciones a seguir en las actividades:</label>
+    <input type="number" name="E_explica" min="1" id="id_E_explica" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_formulaPreguntas">Formula preguntas e instrucciones realizar actividades:</label>
+    <input type="number" name="E_formulaPreguntas" min="1" id="id_E_formulaPreguntas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_comprendeTareas">Comprende las indicaciones para realizar las actividades o tareas:</label>
+    <input type="number" name="E_comprendeTareas" min="1" id="id_E_comprendeTareas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_solicitaAyuda">Solicita ayuda cuando no puede realizar las actividades o tareas:</label>
+    <input type="number" name="E_solicitaAyuda" min="1" id="id_E_solicitaAyuda" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_conversa">Conversa con sus compañeros sobre un tema cada vez más prolongadas:</label>
+    <input type="number" name="E_conversa" min="1" id="id_E_conversa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_expresaInformacion">Expresa información sobre un tema:</label>
+    <input type="number" name="E_expresaInformacion" min="1" id="id_E_expresaInformacion" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_escucha">Escucha narraciones, cuentos, relatos, leyendas y expresa su opinión sobre lo que escucho:</label>
+    <input type="number" name="E_escucha" min="1" id="id_E_escucha" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_narra">Narra cuentos, relatos, leyendas utilizando entonacion y el volumen de voz:</label>
+    <input type="number" name="E_narra" min="1" id="id_E_narra" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_creaCuentos">Crea cuentos, canciones, rimas, trabalenguas, adivinanzas y chistes:</label>
+    <input type="number" name="E_creaCuentos" min="1" id="id_E_creaCuentos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_memorizaPoemas">Memoriza poemas, canciones, rondas, adivinanzas, trabalenguas y chistes:</label>
+    <input type="number" name="E_memorizaPoemas" min="1" id="id_E_memorizaPoemas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_realizaConteo">Realiza actividades de conteo orden estable, cordialidad, correspondencia uno a uno y abstracción:</label>
+    <input type="number" name="E_realizaConteo" min="1" id="id_E_realizaConteo" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_reconoce">Reconoce y nombra objetos (figuras geométricas):</label>
+    <input type="number" name="E_reconoce" min="1" id="id_E_reconoce" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_plantea">Plantea y resuelve problemas en situaciones que le son familiares como agregar, quitar igualar, comprar y repartir objetos:</label>
+    <input type="number" name="E_plantea" min="1" id="id_E_plantea" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_sabeContar">Sabe contar hasta el numero 100:</label>
+    <input type="number" name="E_sabeContar" min="1" id="id_E_sabeContar" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_sabeEscribir">Sabe escribir hasta el numero 100:</label>
+    <input type="number" name="E_sabeEscribir" min="1" id="id_E_sabeEscribir" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_izquierdaDerecha">Ubica izquierda y derecha:</label>
+    <input type="number" name="E_izquierdaDerecha" min="1" id="id_E_izquierdaDerecha"  value="" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_arribaAbajo">Ubica arriba, abajo, enfrente, atrás, cercas, lejos, alto, bajo , grande, pequeño:</label>
+    <input type="number" name="E_arribaAbajo" min="1" id="id_E_arribaAbajo" value="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_llenoVacio">Ubica lleno, vacio, corto, largo, pesado y ligero:</label>
+    <input type="number" name="E_llenoVacio" min="1" id="id_E_llenoVacio" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_conoceDiasMeses">Conoce días, meses y los recuerda con facilidad:</label>
+    <input type="number" name="E_conoceDiasMeses" min="1" id="id_E_conoceDiasMeses" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_ayerMañana">Reconoce el ayer, mañana y pasado:</label>
+    <input type="number" name="E_ayerMañana" min="1" id="id_E_ayerMañana" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_describeSeresVivos">Describe las características de los elementos y de los seres vivos:</label>
+    <input type="number" name="E_describeSeresVivos" min="1" id="id_E_describeSeresVivos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_identificaSeresVivos">Identidica algunos rasgos de los seres vivos:</label>
+    <input type="number" name="E_identificaSeresVivos" min="1" id="id_E_identificaSeresVivos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_describeFenomeno">Describe lo que observa mientras ocurre un fenómeno natural:</label>
+    <input type="number" name="E_describeFenomeno" min="1" id="id_E_describeFenomeno" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_clasifica">Clasifica elementos y seres de la naturaleza según sus características como animales que habitan en el mar, tierra, cielo, animales mamíferos, etc:</label>
+    <input type="number" name="E_clasifica" min="1" id="id_E_clasifica" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_SigueNormas">Sigue normas de seguridad de utilizar materiales, herramientas e instrumentos:</label>
+    <input type="number" name="E_SigueNormas" min="1" id="id_E_SigueNormas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_manipula">Manipula objetos a su alcance como tierra, lodo y arena:</label>
+    <input type="number" name="E_manipula" min="1" id="id_E_manipula" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_pruebas">Realiza pruebas y mezclaz de elementos (experimentos):</label>
+    <input type="number" name="E_pruebas" min="1" id="id_E_pruebas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_reconoceExperimento">Reconoce y describe cambios que ocurren durante y después de algún experimento:</label>
+    <input type="number" name="E_reconoceExperimento" min="1" id="id_E_reconoceExperimento" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_expresaIdeas">Expresa con sus propias ideas iniciales con las finalidad y las modifica consecuencia de experiencia:</label>
+    <input type="number" name="E_expresaIdeas" min="1" id="id_E_expresaIdeas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_establecePresePasa">Establece relación entre el presente y el pasado:</label>
+    <input type="number" name="E_establecePresePasa" min="1" id="id_E_establecePresePasa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_comparteInformacion">Comparte información de las costumbres de su familia y su cominidad:</label>
+    <input type="number" name="E_comparteInformacion" min="1" id="id_E_comparteInformacion" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_identificaAmenazas">Identifica semejanzas y direncia entre su cultura familiar y las de sus compañeros:</label>
+    <input type="number" name="E_identificaAmenazas" min="1" id="id_E_identificaAmenazas" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_escuchaYCanta">Escucha y canta canciones:</label>
+    <input type="number" name="E_escuchaYCanta" min="1" id="id_E_escuchaYCanta" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_sigueRitmo">Sigue el ritmo de canciones:</label>
+    <input type="number" name="E_sigueRitmo" min="1" id="id_E_sigueRitmo" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_inventaCanciones">Inventa canciones conocidas:</label>
+    <input type="number" name="E_inventaCanciones" min="1" id="id_E_inventaCanciones" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_modifica">Modifica el ritmo de canciones conocidas:</label>
+    <input type="number" name="E_modifica" min="1" id="id_E_modifica" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_identificaDife">Identifica diferentes fuentes sonoras como la naturaleza, canto de aves, de animales y instrumentos:</label>
+    <input type="number" name="E_identificaDife" min="1" id="id_E_identificaDife" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_reproduceSecu">Reproduce secuencias ritmicas:</label>
+    <input type="number" name="E_reproduceSecu" min="1" id="id_E_reproduceSecu" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_reconoceGeneroMu">Reconoce distintos géneros de música:</label>
+    <input type="number" name="E_reconoceGeneroMu" min="1" id="id_E_reconoceGeneroMu" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_baila">Baila libremente al escuchar música:</label>
+    <input type="number" name="E_baila" min="1" id="id_E_baila" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_dramatizacion">Realiza dramatización de cuentos, de situaciones de la vida cotidiana:</label>
+    <input type="number" name="E_dramatizacion" min="1" id="id_E_dramatizacion" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_participa">Participa en actividades de expresión corporal movimiento de animales objetos y personas:</label>
+    <input type="number" name="E_participa" min="1" id="id_E_participa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_representa">Representa mediante la expresion corporal desplazándose en espacios fuera y dentro del aula:</label>
+    <input type="number" name="E_representa" min="1" id="id_E_representa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_improvisa">Improvisa movimientos al escuchar una canción:</label>
+    <input type="number" name="E_improvisa" min="1" id="id_E_improvisa" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_manipulaMateriales">Manipula distintos materiales plásticos y crea pinturas, dibujos, grabado :</label>
+    <input type="number" name="E_manipulaMateriales" min="1" id="id_E_manipulaMateriales" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_observaRe">Observan y reflexiona obras de distintos  tiempos y culturas y conserva sobre detalles que llaman su atencion y por que:</label>
+    <input type="number" name="E_observaRe" min="1" id="id_E_observaRe" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_memorizaAutor">Memoriza e identifica el nombre del autor de algunas de las obras de arte conocida:</label>
+    <input type="number" name="E_memorizaAutor" min="1" id="id_E_memorizaAutor" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_desplaza">Se desplaza en diferentes direcciones trepando, rodando y deslizándose:</label>
+    <input type="number" name="E_desplaza" min="1" id="id_E_desplaza" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_muestra">Muestra control y equilibrio de los juegos como subirse, bajarse, trepar y colgarse:</label>
+    <input type="number" name="E_muestra" min="1" id="id_E_muestra" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_participaJuegos">Participa en juegos donde implica permanecer quieto, en distancias, en velocidad:</label>
+    <input type="number" name="E_participaJuegos" min="1" id="id_E_participaJuegos" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_jalaEmpuja">Jala, empuja y captura objetos en movimiento:</label>
+    <input type="number" name="E_jalaEmpuja" min="1" id="id_E_jalaEmpuja" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_explora">Explora, manipula, elige objetos, instrumentos y herramientas de trabajo y sabe que pueden hacer y en donde:</label>
+    <input type="number" name="E_explora" min="1" id="id_E_explora" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_arma">Arma rompecabezas de distinto grado de dificultad:</label>
+    <input type="number" name="E_arma" min="1" id="id_E_arma" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_practica">Práctica medidas de seguridad y evita ponerse en peligro:</label>
+    <input type="number" name="E_practica" min="1" id="id_E_practica" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_conocePractica">Conoce, practica y propone algunas medidas para evitar enfermedades:</label>
+    <input type="number" name="E_conocePractica" min="1" id="id_E_conocePractica" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_conocePropone">Contruye o modela objetos de su propia creación:</label>
+    <input type="number" name="E_conocePropone" min="1" id="id_E_conocePropone" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_reconoceAmbien">Reconoce algunos problemas ambientales y sus repercusiones:</label>
+    <input type="number" name="E_reconoceAmbien" min="1" id="id_E_reconoceAmbien" required="" max="3">
+    
+    </div>
+    
+     <div class="form-inline form-group">
+    
+    <label class="text-right justify-content-end control-label col-sm-5" for="E_identificaPeligro">Identidica que hace ren caso de peligro a su persona, a la familia o a la comunidad:</label>
+    <input type="number" name="E_identificaPeligro" min="1" id="id_E_identificaPeligro" required="" max="3">
+    
+    </div>
+    
+      <div class="form-group ">
+          <div class="d-flex justify-content-around">
+            <button class="btn btn-success" type="submit">Registrar</button>
+            <button class="btn btn-danger" type="reset">Limpiar campos</button>
+          </div>
+    </div>
+</form>
+</div>
+
+{% endblock %}

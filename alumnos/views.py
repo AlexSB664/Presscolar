@@ -8,14 +8,27 @@ from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
 from maestros.models import Evaluacion, grupos, DiarioTrabajo
 import string
-from datetime import date
+from datetime import date, timedelta, datetime
+
+def get_week_days(year, week):
+    d = date(year,1,1)
+    if(d.weekday()>3):
+        d = d+timedelta(7-d.weekday())
+    else:
+        d = d - timedelta(d.weekday())
+    dlt = timedelta(days = (week-1)*7)
+    return d + dlt,  d + dlt + timedelta(days=6)
+
 
 def Index(request):
     user = request.user
     if user.is_active is True:
         if user.is_staff is False :
             if user.has_perm('padres.is_teacher'):
-                hoy = date.today()
+                yar = datetime.now().year
+                today = date.today()
+                wk = today.isocalendar()[1]
+                inicio, fin = get_week_days(yar ,wk)
                 prf = Profesor.objects.get(pro_nombre = user)
                 grp = grupos.objects.select_related().filter(gru_maestro = prf)
                 almGRUP = []
@@ -29,12 +42,14 @@ def Index(request):
                         kj.append(hj.id)
 
                     amevals = []
-                    evals =  Evaluacion.objects.filter(E_alumno__id__in = kj).filter(E_fecha = hoy)
+                    evals =  Evaluacion.objects.filter(E_alumno__id__in = kj).filter(E_fecha__range = [inicio, fin])
                     for nh in evals:
-                        amevals.append(nh.E_alumno.id)
-                        
-                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals})
+                        amevals.append([nh.E_alumno.id, nh.id])
 
+                    if len(amevals) == 0:
+                        amevals.append(["",""])
+
+                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals})
                 ctx = {"Perfil": prf, "Grupos": grp, "Evaluados": evaluacionesArray}
                 print(ctx)
             if user.has_perm('padres.is_tutorr'):

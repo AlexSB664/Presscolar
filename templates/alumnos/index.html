@@ -63,7 +63,7 @@
     </div>
         </div>
         <div class="row float-left" style="height: 430px; width: 250px;">
-            <h5>Alumnos no evaluados</h5>
+            <h5>Alumnos no evaluados semanal</h5>
             <div style="height: 480px; overflow-x: auto;">
             <table id="NoEvals">
             <thead></thead>
@@ -71,7 +71,7 @@
                 {% for e in Evaluados %}
                 {%if e.Grupo == gp.id%}
                 {% for x in gp.gru_alumnos.all %}
-                {% if x.id not in e.Alumnos %}
+                {% if x.id not in e.Alumnos.0 %}
                     <tr>
                         <td>{{x.alu_nombre}}</td>
                         <td onclick="window.open('/evaluar/{{x.slug}}')" title="Evaluar"><span style="color: #e4a200;" class="oi oi-clipboard" aria-hidden="true"> </span></td>
@@ -86,7 +86,7 @@
     </div>
         </div>
         <div class="row float-left" style="height: 430px; width: 250px;">
-            <h5>Alumnos Evaluados        </h5>
+            <h5>Alumnos Evaluados semanal</h5>
             <div style="height: 480px; overflow-x: auto;">
             <table id="Evals" >
             <thead></thead>
@@ -94,10 +94,10 @@
                 {% for e in Evaluados %}
                 {%if e.Grupo == gp.id%}
                 {% for x in gp.gru_alumnos.all %}
-                {% if x.id in e.Alumnos %}
+                {% if x.id in e.Alumnos.0 %}
                     <tr>
                         <td>{{x.alu_nombre}}</td>
-                        <td onclick="window.location ='/detalles/{{x.slug}}'" title="Mas informacion"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
+                        
                     </tr>
                   {% endif %}  
                 {% endfor %}
