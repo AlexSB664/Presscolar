@@ -6,7 +6,7 @@ from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
-from maestros.models import Evaluacion
+from maestros.models import Evaluacion, grupos
 import string
 
 def Index(request):
@@ -14,13 +14,14 @@ def Index(request):
     if user.is_active is True:
         if user.is_staff is False :
             if user.has_perm('padres.is_teacher'):
-                prf = Profesor.objects.filter(pro_nombre = user)
-                ctx = {'Grupo': 'a', 'Perfil': prf, 'Alumnos': 'akumos'}
+                prf = Profesor.objects.get(pro_nombre = user)
+                grp = grupos.objects.select_related().filter(gru_maestro = prf)
+                ctx = {"Perfil": prf, "Grupos": grp}
                 
             if user.has_perm('padres.is_tutorr'):
                 tur = Tutor.objects.get(tut_nombre = user)
                 alm = alumnos.objects.filter(alu_tutores__in = [tur])
-                ctx = {'Alumno':alm}        
+                ctx = {"Alumno":alm}        
             
             return render(request,'alumnos/index.html', ctx)
         else:

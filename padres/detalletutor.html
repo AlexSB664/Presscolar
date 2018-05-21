@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block title %}Informacion del tutor{% endblock %}
+{% block content %}
+<div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+<img src="{{ alm.alu_foto.url }}" class="card-img-top border-bottom"/>
+    <div class="card-body border-bottom">
+<h2 class="form-label text-center">Tutor</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title">{{Tutor.tut_nombres}}</h4>
+            <h6>Usuario: {{Tutor.tut_nombre}}</h6>
+            <h6>Telefono: {{Tutor.tut_numero}}</h6>
+            <h6>Parentesco: {{Tutor.tut_parentesco}}</h6>
+            <h6>Domicilio: {{Tutor.tut_domicilio}}</h6>
+            <p class="card-text">{{Tutora.tut_descripcion}}</p>
+        </div>
+    </div>
+</div>
+
+ {% for alm in Alumnos %}
+<div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px">
+<img src="{{ alm.Foto.url }}" class="card-img-top border-bottom"/>
+    <div class="card-body border-bottom">
+<h2 class="form-label text-center">Alumno</h2>
+    </div>
+    <div class="card-body">
+        <div class="form-inline form-group">
+            <h4 class="card-title">{{alm.alumnos.alu_nombre}}</h4>
+            <h6>Fecha de ingreso: {{alm.alu_fechaIngreso}}</h6>
+            <p class="card-text">{{alm.alu_observaciones}}</p>
+        </div>
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

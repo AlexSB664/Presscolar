@@ -18,8 +18,8 @@ from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
 from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno
-from maestros.views import agregarMaestro #StudentSignUpView
-from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte
+from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo
+from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
 from django.conf import settings
 from django.conf.urls.static import static
@@ -48,7 +48,14 @@ urlpatterns = [
     path('evaluar/<slug:slug>', EvaluarAlumno.as_view()),
     path('addtutor/<slug:slug>', tutorAsign),
     path('Actualizar/Tutores', updateTutores),
-    path('tutor/buscar', TutoresReporte.as_view(), name='filtroTutor')
+    path('tutor/buscar', TutoresReporte.as_view(), name='filtroTutor'),
+    path('detalles/tutor/<slug:slug>', Detail_Tutor),
+    path('actualiza/tutor/<slug:slug>', ActualizarTutores),
+    path('actualiza/maestro/<slug:slug>',actualizarMaestro),
+    path('maestro/buscar', MaestroReporte.as_view(), name='reporteMaestro'),
+    path('detalles/maestro/<slug:slug>', DetalleMaestro),
+    path('maestros/busqueda/', buscarMaestros),
+    path('grupo/crear', crearGrupo, name='crearGrupo'),
 	]
 #para las fotos
 if settings.DEBUG:
