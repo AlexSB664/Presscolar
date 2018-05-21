@@ -29,7 +29,9 @@
 					<td>Genero</td>
                     <td>Detalles</td>
                     <td>Editar</td>
-                    <td>Evaluar</td>
+                    <td>Evaluar Semanal</td>
+                    <td>Evaluar Diario</td>
+
 				</tr>
 			</thead>
 			<tbody id="ResultadoTabla">
@@ -53,6 +55,8 @@
                     <td onclick="window.location ='/detalles/{{p.slug}}'" title="Mas informacion"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
                     <td onclick="window.location ='/updateAlumno/{{p.slug}}'" title="Actualizar datos"><span style="color: #fe6265;" class="oi oi-pencil"  aria-hidden="true"></span></td>
                     <td onclick="window.location='/evaluar/{{p.slug}}'" title="Evaluar"><span style="color: #e4a200;" class="oi oi-clipboard" aria-hidden="true"> </span></td>
+                    <td onclick="window.location='/semanal/{{p.slug}}'" title="Evaluar"><span style="color: #e4a200;" class="oi oi-calendar" aria-hidden="true"> </span></td>
+
 				</tr>
 			{% endfor %}
 			</tbody>

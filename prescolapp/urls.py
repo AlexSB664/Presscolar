@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno
+from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario
 from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo, buscarSinGrupo, buscarGrupo, GrupoReporte, infoGrupo, actualizaGrupo,buscarEnelGrupo
 from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
@@ -46,6 +46,7 @@ urlpatterns = [
     path('updateAlumno/<slug:slug>', Update_Alumno.as_view(), name="UpdateAlumno"),
     path('detalles/<slug:slug>', Detail_Alumno.as_view()),
     path('evaluar/<slug:slug>', EvaluarAlumno.as_view()),
+    path('semanal/<slug:slug>', EvaDiario.as_view()),
     path('addtutor/<slug:slug>', tutorAsign),
     path('Actualizar/Tutores', updateTutores),
     path('tutor/buscar', TutoresReporte.as_view(), name='filtroTutor'),

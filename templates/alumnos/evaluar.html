@@ -25,7 +25,9 @@
     {{field}}
     {% elif field.name == 'E_maestro' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
-    <input class="form-control col-sm-2"  readonly="True" id="{{field.id}}" name="{{field.name}}" value="{{user}}" required />
+    <input class="form-control col-sm-2"  readonly="True" id="{{field.id}}" name="{{field.name}}" text="asd" value="{{user.id}}" required hidden="True" />
+    <input class="form-control col-sm-2"  readonly="True" id="{{field.id}}" name="copiaxp" text="asd" value="{{user.username}}" required />
+
     {% elif field.name == 'E_alumno' %}
     <label class="text-right justify-content-end control-label col-sm-2" for="{{ field.name }}">{{ field.label }}</label>
     <input class="form-control col-sm-2"  readonly="True" id="id={{field.id}}" name="{{field.name}}" value="{{alumno}}" required />
