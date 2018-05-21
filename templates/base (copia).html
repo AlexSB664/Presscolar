@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ {% load staticfiles %}
+{% load inclusion_tags %}
+    <head>
+    <link href="{% static 'css/open-iconic-bootstrap.css' %}" rel="stylesheet">
+   <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}"> 
+    <link rel="stylesheet" href="{% static 'css/offcanvas.css' %}">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        
+
+    <title>{% block title %}
+        {% endblock %}</title>
+        {% block archivos %}{% endblock %}
+    </head>
+<body style="background-image: url('/media/media/back/backGP.jpg');  background-repeat: no-repeat; background-attachment: fixed; background-size: cover;">
+        {% if user.is_authenticated %}
+    <nav class="navbar navbar-expand-sm fixed-top bg-info navbar-dark">
+      <a class="navbar-brand" href="#"> {{ user.username }}</a>
+      <button class="navbar-toggler p-0 border-0" type="button" data-toggle="offcanvas">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Inicio</a>
+          </li>
+    {% if perms.padres.is_teacher  %}
+            <li class="nav-item">
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Grupos</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="#">Agregar</a>
+              <a class="dropdown-item" href="#">Modificar</a>
+              <a class="dropdown-item" href="#">Buscar</a>
+            </div>
+          </li>
+          <li class="nav-item">
+           <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Maestros</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown02">
+              <a class="dropdown-item" href="../../maestros/nuevo">Agregar</a>
+              <a class="dropdown-item" href="#">Modificar</a>
+              <a class="dropdown-item" href="#">Buscar</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Tutores</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown01">
+              <a class="dropdown-item" href="../padres/agregar">Agregar</a>
+              <a class="dropdown-item" href="#">Modificar</a>
+              <a class="dropdown-item" href="../tutor/buscar">Buscar</a>
+            </div>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" id="dropdown01" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alumnos</a>
+            <div class="dropdown-menu" aria-labelledby="dropdown03">
+              <a class="dropdown-item" href="../alumnos/agregar">Agregar</a>
+              <a class="dropdown-item" href="#">Calificar alumno</a>
+              <a class="dropdown-item" href="../alumnos/detalles">Buscar</a>           </div>
+          </li>
+        {% endif %}
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+         <!-- <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search" type="text">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button> -->
+         <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="../cerrar">Salir</a>
+          </li>
+            </ul>
+        </form>
+      </div>
+    </nav>
+
+        {% else %} <meta http-equiv="refresh" content="0; URL=../login" /> {% endif %}
+    <div class="container">
+{% block content %}
+{% endblock %}
+    </div>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="{% static 'js/jquery-3.js' %}" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>window.jQuery || document.write('<script src="{% static "js/jquery-slim.min.js"%}"><\/script>')</script>
+    <script src="{% static 'js/popper.js' %}"></script>
+    <script src="{% static 'js/bootstrap.js' %}"></script>
+    <script src="{% static 'js/holder.js' %}"></script>
+    <script src="{% static 'js/offcanvas.js' %}"></script>
+  {% block loadFiles %}
+    {% endblock %}
+
+<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32" preserveAspectRatio="none" style="display: none; visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs><style type="text/css"></style></defs><text x="0" y="2" style="font-weight:bold;font-size:2pt;font-family:Arial, Helvetica, Open Sans, sans-serif">32x32</text></svg>
+</body>
+</html>
+
