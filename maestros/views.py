@@ -183,4 +183,3 @@ def infoGrupo(request, slug):
     grp = grupos.objects.select_related().get(id = slug)
     ctx = {"Grupo": grp, "Alumnos": grp.gru_alumnos.all(), "Profesor": grp.gru_maestro}
     return render(request, 'grupos/detallegrupo.html', ctx)
-        
