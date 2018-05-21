@@ -1,12 +1,12 @@
 from django.shortcuts import render
 from alumnos.models import alumnos
 from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView, FormView
-from alumnos.forms import Alumno_Form, Alumno_Chido, Alumno_Eva
+from alumnos.forms import Alumno_Form, Alumno_Chido, Alumno_Eva, Alumno_EvaDiario
 from django.urls import reverse_lazy
 from django.core import serializers
 from django.http import JsonResponse, HttpResponse
 from padres.models import Tutor, Profesor
-from maestros.models import Evaluacion, grupos
+from maestros.models import Evaluacion, grupos, DiarioTrabajo
 import string
 from datetime import date
 
@@ -253,3 +253,30 @@ class EvaluarAlumno(FormView):
         eva.E_identificaPeligro = form.cleaned_data['E_identificaPeligro']
         eva.save()
         return super(EvaluarAlumno,self).form_valid(form)
+
+class EvaDiario(FormView):
+    template_name = "alumnos/evaluarDiario.html"
+    form_class = Alumno_EvaDiario
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, *args, **kwargs):
+        ctx = super(EvaDiario, self).get_context_data(*args, **kwargs)
+        #ctx['slug'] = self.kwargs['slug'] # or Tag.objects.get(slug=...)
+        slug = self.kwargs['slug']
+        ctx ['alumno'] = alumnos.objects.get(slug=slug)
+        return ctx
+
+    def form_valid(self, form):
+        evaD = DiarioTrabajo()
+        filtro = form.cleaned_data['DT_maestro']
+        maes = Profesor.objects.get(pro_nombre=filtro)
+        evaD.DT_maestro = maes
+        filtroalum = form.cleaned_data['DT_alumno']
+        alu = alumnos.objects.get(alu_nombre=filtroalum)
+        evaD.DT_alumno = alu
+        evaD.DT_fecha = form.cleaned_data['DT_fecha']
+        evaD.DT_descripcion = form.cleaned_data['DT_descripcion']
+        evaD.DT_actividadApoyo = form.cleaned_data['DT_actividadApoyo']
+        evaD.DT_necesidades = form.cleaned_data['DT_necesidades']
+        evaD.save()
+        return super(EvaDiario,self).form_valid(form)
