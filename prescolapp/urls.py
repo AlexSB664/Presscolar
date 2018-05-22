@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
-from alumnos.views import Index, AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario, detalleEvalSem
+from alumnos.views import Index,DiarioReporte ,AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario, detalleEvalSem, detalleDiario
 from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo, buscarSinGrupo, buscarGrupo, GrupoReporte, infoGrupo, actualizaGrupo,buscarEnelGrupo
 from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
@@ -46,7 +46,7 @@ urlpatterns = [
     path('updateAlumno/<slug:slug>', Update_Alumno.as_view(), name="UpdateAlumno"),
     path('detalles/<slug:slug>', Detail_Alumno.as_view()),
     path('evaluar/<slug:slug>', EvaluarAlumno.as_view()),
-    path('semanal/<slug:slug>', EvaDiario.as_view()),
+    path('diario/<slug:slug>', EvaDiario.as_view()),
     path('addtutor/<slug:slug>', tutorAsign),
     path('Actualizar/Tutores', updateTutores),
     path('tutor/buscar', TutoresReporte.as_view(), name='filtroTutor'),
@@ -63,7 +63,10 @@ urlpatterns = [
     path('detalles/grupos/<slug:slug>',infoGrupo),
     path('actualiza/grupo/<slug:slug>', actualizaGrupo ),
     path('buscar/alumnosSG/<slug:slug>/', buscarEnelGrupo),
-	path('detalle/evaluacion/semanal/<slug:slug>', detalleEvalSem)
+	path('detalle/evaluacion/semanal/<slug:slug>', detalleEvalSem),
+    path('detalle/evaluacion/diario/<slug:slug>', detalleDiario),
+    path('reporte/diario', DiarioReporte),
+    
     ]
 #para las fotos
 if settings.DEBUG:

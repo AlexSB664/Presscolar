@@ -183,12 +183,19 @@ class EvaluarAlumno(FormView):
     def form_valid(self, form):
         eva = Evaluacion()
         filtro = form.cleaned_data['E_maestro']
-        maeusr = User.objects.get(username = filtro)
-        maes = Profesor.objects.get(pro_nombre=maeusr)
+        maes = Profesor.objects.get(pro_nombre=filtro)
         eva.E_maestro = maes
         filtroalum = form.cleaned_data['E_alumno']
         alu = alumnos.objects.get(alu_nombre=filtroalum)
         eva.E_alumno = alu
+        #eva = Evaluacion()
+        #filtro = form.cleaned_data['E_maestro']
+        #maeusr = User.objects.get(username = filtro)
+        #maes = Profesor.objects.get(pro_nombre=maeusr)
+        #eva.E_maestro = maes
+        #filtroalum = form.cleaned_data['E_alumno']
+        #alu = alumnos.objects.get(alu_nombre=filtroalum)
+        #eva.E_alumno = alu
         eva.E_fecha = form.cleaned_data['E_fecha']
         eva.E_comparte = form.cleaned_data['E_comparte']
         eva.E_apoya =  form.cleaned_data['E_apoya']
@@ -297,7 +304,8 @@ class EvaDiario(FormView):
         maes = Profesor.objects.get(pro_nombre=filtro)
         evaD.DT_maestro = maes
         filtroalum = form.cleaned_data['DT_alumno']
-        alu = alumnos.objects.get(alu_nombre=filtroalum)
+        slug = self.kwargs['slug']
+        alu = alumnos.objects.get(slug=slug)
         evaD.DT_alumno = alu
         evaD.DT_fecha = form.cleaned_data['DT_fecha']
         evaD.DT_descripcion = form.cleaned_data['DT_descripcion']
@@ -310,3 +318,12 @@ def detalleEvalSem(request, slug):
     eva = Evaluacion.objects.select_related().get(id = slug);
     ctx = {"Evaluacion": eva}
     return render(request, 'evaluaciones/detalleevaluacion.html', ctx)
+
+def detalleDiario(request, slug):
+    dia = DiarioTrabajo.objects.select_related().get(id = slug);
+    ctx = {"Diario":dia}
+    return render(request, 'alumnos/DetalleDiario.html', ctx)
+
+class DiarioReporte(ListView):
+    template_name="evaluaciones/reporteDiario.html"
+    model = DiarioTrabajo.objects.filter(DT_fecha=date.today())

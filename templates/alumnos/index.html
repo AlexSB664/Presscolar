@@ -69,10 +69,10 @@
                 <tr><td>{{x.alu_nombre}}</td>
                     {% if x.id in e.Diario.0.Alumno %}
                         {% with e.Diario.0.Alumno|get_at_index:x.id as indice %}
-                        <td title="Ver evaluacion" id="{{ e.Diario.0.Diario|get_data:indice }}"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
+                        <td onclick="window.location='detalle/evaluacion/diario/{{e.Diario.0.Diario.0}}'" title="Ver evaluacion" id="{{ e.Diario.0.Diario|get_data:indice }}"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
                         {% endwith %}
                     {% else %}
-                    <td title="Evaluar" ><span style="color: #e4a200;" class="oi oi-clipboard" aria-hidden="true"> </span></td>
+                    <td onclick="window.location='/diario/{{x.slug}}'" title="Evaluar"><span style="color: #e4a200;" class="oi oi-calendar" aria-hidden="true"> </span></td>
                     {% endif %}
                     
                 </tr>
