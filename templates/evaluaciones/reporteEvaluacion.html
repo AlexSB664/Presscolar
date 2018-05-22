@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+	{%block title %} 
+		Alumnos
+	{% endblock %}
+
+	{% block content%}
+<div class="mt-4 mb-4 card border rounded border-warning">
+			<div class="container">
+                <div class="card-body border-bottom">
+<h2 class="form-label text-center">Evaluaciones Semanales</h2>
+<p class="form-label text-justify font-italic">Se muestran las evaluaciones que se hicieron esta semana</p>
+    </div>
+                <div class="form-inline margenes10">
+              
+                </div>
+		<table class = "table table-bordered" >
+			<thead>
+				<tr>
+					<td>Maestro</td>
+					<td>Alumno</td>
+					<td>Fecha en la que se evaluo</td>
+
+				</tr>
+			</thead>
+			<tbody id="ResultadoTabla">
+				{% for p in object_list %}
+                <tr>
+                	
+					<td>{{ p.E_maestro }}</td>
+					<td>{{ p.E_alumno}} con el id:{{ p.E_alumno.id}}</td>
+					<td>{{ p.E_fecha }} </td>
+					<!--<td>{{ p.id }}</td>-->
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+			<br>
+			<a href="/" class="btn btn-default">Volver</a>
+	</div>
+</div>
+<div class="modal" id="modalImagen" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Foto</h5>
+        <button type="button" class="close" data-dismisdanflalvs="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <img height="100%" width="100%" src="" class='img-responsive' id="imgModal" />
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block loadFiles %}
+</script>
+{% endblock %}
