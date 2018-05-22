@@ -41,7 +41,7 @@ urlpatterns = [
     url(r'^tutores/busqueda',busquedaTurores,name='filtroTutores'),
     url(r'^alumnos/Buscar', busquedaAlumno, name='filtroAlumno'),
     path('detalleAlumno/<slug:slug>', Detail_ninja.as_view(), name='detail_view' ),
-    path('maestros/nuevo', agregarMaestro.as_view(), name="add_teacher"),
+    url(r'^maestros/nuevo', agregarMaestro.as_view(), name="add_teacher"),
     url(r'^padres/agregar', addTutor.as_view(), name="AddTutor"),
     path('updateAlumno/<slug:slug>', Update_Alumno.as_view(), name="UpdateAlumno"),
     path('detalles/<slug:slug>', Detail_Alumno.as_view()),
