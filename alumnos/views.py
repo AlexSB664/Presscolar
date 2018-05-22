@@ -42,6 +42,7 @@ def Index(request):
                     for hj in almGRUP[j]['Alumnos']:
                         kj.append(hj.id)
 
+                    diarios = []
                     amevals = []
                     evalpos = []
                     evals =  Evaluacion.objects.filter(E_alumno__id__in = kj).filter(E_fecha__range = [inicio, fin])
@@ -49,8 +50,15 @@ def Index(request):
                         amevals.append(nh.E_alumno.id)
                         evalpos.append({"IDA": nh.E_alumno.id, "EvaId": nh.id})
 
+                    diar = DiarioTrabajo.objects.select_related().filter(DT_fecha = today).filter(DT_alumno__id__in = kj)
+                    idDiar = []
+                    aluDiar = []           
+                    for ml in diar:
+                        idDiar.append(ml.id)
+                        aluDiar.append(ml.DT_alumno.id)
 
-                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals, "EvalId": evalpos})
+                    diarios.append({"Diario": idDiar, "Alumno": aluDiar})
+                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals, "EvalId": evalpos, "Diario": diarios})
                 ctx = {"Perfil": prf, "Grupos": grp, "Evaluados": evaluacionesArray}
                 print(ctx)
             if user.has_perm('padres.is_tutorr'):
