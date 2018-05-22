@@ -17,7 +17,7 @@ from django.contrib import admin
 from django.urls import path
 from django.conf.urls import url, include
 from django.contrib.auth.views import logout_then_login
-from alumnos.views import Index,DiarioReporte ,AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario, detalleEvalSem, detalleDiario
+from alumnos.views import Index ,AlumnoCreate, AlumnoReporte, busquedaTurores,ReporteNoChafa, busquedaAlumno,Detail_ninja, Update_Alumno, Detail_Alumno, AgregarAlumConEstilo, EvaluarAlumno, EvaDiario, detalleEvalSem, detalleDiario, DiarioReporte, EvaluacionReporte
 from maestros.views import agregarMaestro, actualizarMaestro, MaestroReporte, buscarMaestros,DetalleMaestro, crearGrupo, buscarSinGrupo, buscarGrupo, GrupoReporte, infoGrupo, actualizaGrupo,buscarEnelGrupo
 from padres.views import LogIn, Index2, login, addTutor, tutorAsign,updateTutores, TutoresReporte, Detail_Tutor, ActualizarTutores
 #para las fotos
@@ -65,8 +65,8 @@ urlpatterns = [
     path('buscar/alumnosSG/<slug:slug>/', buscarEnelGrupo),
 	path('detalle/evaluacion/semanal/<slug:slug>', detalleEvalSem),
     path('detalle/evaluacion/diario/<slug:slug>', detalleDiario),
-    path('reporte/diario', DiarioReporte),
-    
+    url(r'^reporte/diario', DiarioReporte.as_view(),name="reporteDiario"),
+    url(r'^reporte/evaluacion', EvaluacionReporte.as_view(),name="reporteEvaluacion"),
     ]
 #para las fotos
 if settings.DEBUG:

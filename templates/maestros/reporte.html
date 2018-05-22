@@ -22,7 +22,7 @@
 {% for object in object_list %}
 <tr>
     <td>{{object.pro_nombre}}</td>
-    <td>{{object.pro_nombres}} {{object.pro_apellidoPaterno}} {{object.pro_apellidoPaterno}}</td>
+    <td>{{object.pro_nombres}} {{object.pro_apellidoPaterno}} {{object.pro_apellidoMaterno}}</td>
     <td>{{object.pro_fechaNacimento|date:"Y-m-d"}}</td>
     <td class="text-center" onclick="window.open('/detalles/maestro/{{object.pro_nombre}}')" ><span style="color: #17a2b8;" class="oi oi-info"></span></td>
     <td class="text-center" onclick="window.open('/actualiza/maestro/{{object.pro_nombre}}')" ><span     style="color: #fe6265;" class="oi oi-pencil"></span></td>

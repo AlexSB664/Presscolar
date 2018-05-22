@@ -91,7 +91,21 @@ class AlumnoCreate(CreateView):
 class AlumnoReporte(ListView):
 	template_name = "alumnos/reporte.html"
 	model = alumnos
-    
+
+class DiarioReporte(ListView):
+    template_name="evaluaciones/reporteDiario.html"
+    today = date.today()
+    model = DiarioTrabajo
+    queryset = DiarioTrabajo.objects.filter(DT_fecha__startswith=today)
+
+class EvaluacionReporte(ListView):
+    template_name="evaluaciones/reporteEvaluacion.html"
+    model = Evaluacion
+    date = date.today()
+    start_week = date - timedelta(date.weekday())
+    end_week = start_week + timedelta(7)
+    queryset = Evaluacion.objects.filter(E_fecha__range= [start_week, end_week])
+
 def busquedaTurores(request):
     if  request.method == 'GET':
         datos = []
@@ -147,7 +161,7 @@ class Detail_Alumno(DetailView):
 class AgregarAlumConEstilo(FormView):
     template_name = "alumnos/crear.html"
     form_class = Alumno_Chido
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('alumnos_reporte')
     
     def form_valid(self, form):
         alu = alumnos()
@@ -171,7 +185,7 @@ class AgregarAlumConEstilo(FormView):
 class EvaluarAlumno(FormView):
     template_name = "alumnos/evaluar.html"
     form_class = Alumno_Eva
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('reporteEvaluacion')
 
     def get_context_data(self, *args, **kwargs):
         ctx = super(EvaluarAlumno, self).get_context_data(*args, **kwargs)
@@ -289,7 +303,7 @@ class EvaluarAlumno(FormView):
 class EvaDiario(FormView):
     template_name = "alumnos/evaluarDiario.html"
     form_class = Alumno_EvaDiario
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('reporteDiario')
 
     def get_context_data(self, *args, **kwargs):
         ctx = super(EvaDiario, self).get_context_data(*args, **kwargs)
@@ -323,7 +337,3 @@ def detalleDiario(request, slug):
     dia = DiarioTrabajo.objects.select_related().get(id = slug);
     ctx = {"Diario":dia}
     return render(request, 'alumnos/DetalleDiario.html', ctx)
-
-class DiarioReporte(ListView):
-    template_name="evaluaciones/reporteDiario.html"
-    model = DiarioTrabajo.objects.filter(DT_fecha=date.today())
