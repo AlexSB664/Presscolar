@@ -22,7 +22,7 @@ class DiarioTrabajo(models.Model):
     DT_descripcion = models.TextField()
     DT_actividadApoyo = models.TextField()
     DT_necesidades = models.TextField()
-    
+
     def __str__(self):
         return str(self.DT_alumno)
     

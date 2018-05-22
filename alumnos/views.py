@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from alumnos.models import alumnos
+from django.contrib.auth.models import User
 from django.views.generic import CreateView, ListView,DetailView, UpdateView, DetailView, FormView
 from alumnos.forms import Alumno_Form, Alumno_Chido, Alumno_Eva, Alumno_EvaDiario
 from django.urls import reverse_lazy
@@ -41,15 +42,23 @@ def Index(request):
                     for hj in almGRUP[j]['Alumnos']:
                         kj.append(hj.id)
 
+                    diarios = []
                     amevals = []
+                    evalpos = []
                     evals =  Evaluacion.objects.filter(E_alumno__id__in = kj).filter(E_fecha__range = [inicio, fin])
                     for nh in evals:
-                        amevals.append([nh.E_alumno.id, nh.id])
+                        amevals.append(nh.E_alumno.id)
+                        evalpos.append({"IDA": nh.E_alumno.id, "EvaId": nh.id})
 
-                    if len(amevals) == 0:
-                        amevals.append(["",""])
+                    diar = DiarioTrabajo.objects.select_related().filter(DT_fecha = today).filter(DT_alumno__id__in = kj)
+                    idDiar = []
+                    aluDiar = []           
+                    for ml in diar:
+                        idDiar.append(ml.id)
+                        aluDiar.append(ml.DT_alumno.id)
 
-                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals})
+                    diarios.append({"Diario": idDiar, "Alumno": aluDiar})
+                    evaluacionesArray.append({"Grupo": almGRUP[j]['Grupo'], "Alumnos": amevals, "EvalId": evalpos, "Diario": diarios})
                 ctx = {"Perfil": prf, "Grupos": grp, "Evaluados": evaluacionesArray}
                 print(ctx)
             if user.has_perm('padres.is_tutorr'):
@@ -174,7 +183,8 @@ class EvaluarAlumno(FormView):
     def form_valid(self, form):
         eva = Evaluacion()
         filtro = form.cleaned_data['E_maestro']
-        maes = Profesor.objects.get(pro_nombre=filtro)
+        maeusr = User.objects.get(username = filtro)
+        maes = Profesor.objects.get(pro_nombre=maeusr)
         eva.E_maestro = maes
         filtroalum = form.cleaned_data['E_alumno']
         alu = alumnos.objects.get(alu_nombre=filtroalum)
@@ -295,3 +305,8 @@ class EvaDiario(FormView):
         evaD.DT_necesidades = form.cleaned_data['DT_necesidades']
         evaD.save()
         return super(EvaDiario,self).form_valid(form)
+
+def detalleEvalSem(request, slug):
+    eva = Evaluacion.objects.select_related().get(id = slug);
+    ctx = {"Evaluacion": eva}
+    return render(request, 'evaluaciones/detalleevaluacion.html', ctx)
