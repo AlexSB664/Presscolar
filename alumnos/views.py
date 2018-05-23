@@ -337,3 +337,15 @@ def detalleDiario(request, slug):
     dia = DiarioTrabajo.objects.select_related().get(id = slug);
     ctx = {"Diario":dia}
     return render(request, 'alumnos/DetalleDiario.html', ctx)
+
+def reporteEvaluacionAlumno(request,slug):
+    alumn = alumnos.objects.get(slug= slug)
+    reportes = Evaluacion.objects.filter(E_alumno = alumn)
+    ctx = {"object_list" : reportes}
+    return render(request, 'evaluaciones/reporteEvaluacion.html',ctx)
+
+def reporteDiarioAlumno(request, slug):
+    alumn = alumnos.objects.get(slug,slug)
+    diarios = DiarioTrabajo.objects.get(DT_alumno = alumn)
+    ctx = {"object_list":diarios}
+    return render(request, 'evaluaciones/reporteDiario.html', ctx)

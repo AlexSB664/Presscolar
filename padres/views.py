@@ -52,7 +52,7 @@ def updateTutores(request):
 class addTutor(generic.FormView):
     template_name = 'padres/agregar.html'
     form_class = AddTutorForm
-    success_url = reverse_lazy('AddTutor')
+    success_url = reverse_lazy('reporteTutor')
     
     def form_valid(self, form):
         Usr = form.save()

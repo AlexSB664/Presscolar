@@ -20,6 +20,7 @@
 					<td>Maestro</td>
 					<td>Alumno</td>
 					<td>Fecha en la que se evaluo</td>
+					<td>--</td>
 
 				</tr>
 			</thead>
@@ -30,6 +31,7 @@
 					<td>{{ p.E_maestro }}</td>
 					<td>{{ p.E_alumno}} con el id:{{ p.E_alumno.id}}</td>
 					<td>{{ p.E_fecha }} </td>
+					<td onclick="window.location ='/detalle/evaluacion/semanal/{{p.id}}'" title="Mas informacion"><span style="color: #17a2b8;" class="oi oi-info"></span></td>
 					<!--<td>{{ p.id }}</td>-->
 				</tr>
 			{% endfor %}

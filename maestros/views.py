@@ -18,7 +18,7 @@ import json
 class agregarMaestro(FormView):
     template_name = 'maestros/addTeacher.html'
     form_class = StudentSignUpForm
-    success_url =reverse_lazy('add_teacher')
+    success_url =reverse_lazy('reporteMaestro')
     
     def form_valid(self, form):
         usr = form.save()

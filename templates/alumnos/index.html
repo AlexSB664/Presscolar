@@ -6,7 +6,7 @@
 {% if perms.padres.is_tutorr %}
     {% for alm in Alumno %}
 
-<div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px; height: 505px;">
+<div class="mr-md-3 mt-4 mb-4 card border rounded border-warning float-left " style="max-width:300px; height: 600px;">
 <img src="{{ alm.alu_foto.url }}" class="card-img-top border-bottom"/>
     <div class="card-body border-bottom">
 <h2 class="form-label text-center">Alumno</h2>
@@ -15,7 +15,9 @@
         <div class="form-inline form-group">
             <h4 class="card-title">{{alm.alu_nombre}}</h4>
             <h6>Fecha de ingreso: {{alm.alu_fechaIngreso}}</h6>
-            <p class="card-text">{{alm.alu_observaciones}}</p>
+            <p class="w-100 card-text">{{alm.alu_observaciones}}</p>
+            <h5 class="w-100" >Evaluacion semanal<span onclick="window.open('reporte/evallu/{{alm.slug}}')" style="color: #17a2b8;" class="oi oi-info"></span></h5>
+            <h5 class="w-100" >Evaluacion diaria<span onclick="window.open('reporte/diarioalu/{{alm.slug}}')" style="color: #17a2b8;" class="oi oi-info"></span></h5>
         </div>
     </div>
 </div>
